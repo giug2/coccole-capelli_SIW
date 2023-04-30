@@ -1,4 +1,4 @@
-package it.uniroma3.siw;
+package it.uniroma3.siw.coccolecapelli;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
