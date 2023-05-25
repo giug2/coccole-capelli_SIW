@@ -1,8 +1,6 @@
 package it.uniroma3.siw.coccolecapelli.authentication;
 
-
 import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +17,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-//public  class WebSecurityConfig {
 	public class AuthConfiguration {
 
     private static final String ADMIN_ROLE = null;
@@ -27,21 +24,21 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
     private DataSource dataSource;
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth)
-            throws Exception {
-        auth.jdbcAuthentication()
+    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+        		.jdbcAuthentication()
                 .dataSource(dataSource)
                 .authoritiesByUsernameQuery("SELECT username, role from credentials WHERE username=?")
                 .usersByUsernameQuery("SELECT username, password, 1 as enabled FROM credentials WHERE username=?");
     }
-    
+
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    protected PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
+    protected AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
         return authenticationConfiguration.getAuthenticationManager();
     }
 
