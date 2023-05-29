@@ -6,18 +6,14 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import it.uniroma3.siw.coccolecapelli.model.Credentials;
-import it.uniroma3.siw.coccolecapelli.model.User;
 import it.uniroma3.siw.coccolecapelli.service.CredentialsService;
 
-/**
- * Validator for Credentials
- */
 @Component
 public class CredentialsValidator implements Validator {
 
     @Autowired
     private CredentialsService credentialsService;
-
+    
     final Integer MAX_USERNAME_LENGTH = 20;
     final Integer MIN_USERNAME_LENGTH = 4;
     final Integer MAX_PASSWORD_LENGTH = 20;
@@ -44,7 +40,6 @@ public class CredentialsValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return User.class.equals(clazz);
+        return Credentials.class.equals(clazz);
     }
-
 }

@@ -1,34 +1,39 @@
 package it.uniroma3.siw.coccolecapelli.model;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Credentials {
 	
-	public static final String DEFAULT_ROLE = "DEFAULT";
+	/* Ruoli */
+	public static final String GENERIC_USER_ROLE = "GENERIC_USER";
 	public static final String ADMIN_ROLE = "ADMIN";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(nullable = false, unique = true)
+	@NotBlank
+	@Column (unique = true)
+	@Size(min = 3, max = 15)
 	private String username;
-
-	@Column(nullable = false)
+	
+	@NotBlank
+	@Size(min = 8, max = 255)
 	private String password;
 	
-	@Column(nullable = false)
 	private String role;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	private User user;
+	private User utente;
 
 	public Long getId() {
 		return id;
@@ -62,11 +67,12 @@ public class Credentials {
 		this.role = role;
 	}
 
-	public User getUser() {
-		return user;
+	public User getUtente() {
+		return utente;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUtente(User utente) {
+		this.utente = utente;
 	}
+	
 }

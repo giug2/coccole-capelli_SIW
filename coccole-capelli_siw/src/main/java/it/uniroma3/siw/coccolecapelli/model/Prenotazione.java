@@ -1,31 +1,29 @@
 package it.uniroma3.siw.coccolecapelli.model;
 
-import java.util.Objects;
-
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Prenotazione {
-
+	
+	public static final String DIR_PAGES_PREN = "information/prenotazione/";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	@ManyToOne
-	private Cliente cliente;
-	
-	@ManyToOne
-	private Dipendente dipendente;
+	private Parrucchiere parrucchiere;
 	
 	@OneToOne
 	private Disponibilita disponibilita;
 	
-	public Prenotazione (Long id, Cliente cliente, Disponibilita disp, Dipendente dipen) {
-		this.id = id;
-		this.cliente = cliente;
-		this.dipendente = dipen;
-		this.disponibilita = disp;
-	}
+	@ManyToOne
+	private User cliente;
 
 	public Long getId() {
 		return id;
@@ -35,21 +33,14 @@ public class Prenotazione {
 		this.id = id;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public Parrucchiere getParrucchiere() {
+		return parrucchiere;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setParrucchiere(Parrucchiere parrucchiere) {
+		this.parrucchiere = parrucchiere;
 	}
 
-	public Dipendente getDipendente() {
-		return dipendente;
-	}
-
-	public void setDipendente(Dipendente dipendente) {
-		this.dipendente = dipendente;
-	}
 
 	public Disponibilita getDisponibilita() {
 		return disponibilita;
@@ -59,21 +50,12 @@ public class Prenotazione {
 		this.disponibilita = disponibilita;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(dipendente, disponibilita);
+	public User getCliente() {
+		return cliente;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Prenotazione other = (Prenotazione) obj;
-		return Objects.equals(dipendente, other.dipendente) && Objects.equals(disponibilita, other.disponibilita);
+	public void setCliente(User cliente) {
+		this.cliente = cliente;
 	}
-	
+
 }

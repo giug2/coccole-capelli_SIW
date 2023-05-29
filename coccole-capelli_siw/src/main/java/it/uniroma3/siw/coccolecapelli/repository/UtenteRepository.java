@@ -4,6 +4,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import it.uniroma3.siw.coccolecapelli.model.User;
 
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UtenteRepository extends CrudRepository<User, Long> {
+
+	boolean existsByNomeAndCognome(String nome, String cognome);
 
 }

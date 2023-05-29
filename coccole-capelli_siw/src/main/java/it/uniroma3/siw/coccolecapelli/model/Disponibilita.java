@@ -1,94 +1,82 @@
 package it.uniroma3.siw.coccolecapelli.model;
 
-import java.time.LocalDate;
-import java.util.Objects;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import jakarta.annotation.Nonnull;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Disponibilita {
-
+	
+	public static final String DIR_PAGES_DISP = "information/disponibilita/";
+	public static final String DIR_ADMIN_PAGES_DISP = "admin/disponibilita/";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Nonnull
-	private String orario;
+	@NotBlank
+	private String data;
 	
-	@Nonnull
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
-	private LocalDate data;
+	@NotBlank
+	private String oraInizio;
+	
+	@NotBlank
+	private String oraFine;
+	
+	private boolean active;
 	
 	@ManyToOne
-	private Dipendente dipendente;
+	private Parrucchiere parrucchiere;
 	
-	@OneToOne 
-	private Prenotazione prenotazione;
-	
-	public Disponibilita (Long id, String ora, LocalDate data,Dipendente dipendente) {
-		this.id = id;
-		this.orario = ora;
-		this.data = data;
-		this.dipendente = dipendente;
-	}
-
 	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getOrario() {
-		return orario;
-	}
-
-	public void setOrario(String orario) {
-		this.orario = orario;
-	}
-
-	public LocalDate getData() {
+	public String getData() {
 		return data;
 	}
 
-	public void setData(LocalDate data) {
+	public void setData(String data) {
 		this.data = data;
 	}
+
+	public String getOraInizio() {
+		return oraInizio;
+	}
+
+	public void setOraInizio(String oraInizio) {
+		this.oraInizio = oraInizio;
+	}
+
+	public String getOraFine() {
+		return oraFine;
+	}
+
+	public void setOraFine(String oraFine) {
+		this.oraFine = oraFine;
+	}
+
+	public Parrucchiere getParrucchiere() {
+		return parrucchiere;
+	}
+
+	public void setParrucchiere(Parrucchiere parrucchiere) {
+		this.parrucchiere = parrucchiere;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 	
-	public Dipendente getDipendente() {
-		return dipendente;
-	}
-
-	public void setDipendente(Dipendente dipendente) {
-		this.dipendente = dipendente;
-	}
-	
-	public Prenotazione getPrenotazione() {
-		return prenotazione;
-	}
-
-	public void setPrenotazione(Prenotazione prenotazione) {
-		this.prenotazione = prenotazione;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(data, orario);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Disponibilita other = (Disponibilita) obj;
-		return Objects.equals(data, other.data) && Objects.equals(orario, other.orario);
-	}
-
 }
