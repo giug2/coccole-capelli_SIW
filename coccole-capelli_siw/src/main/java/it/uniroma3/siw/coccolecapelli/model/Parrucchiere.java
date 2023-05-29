@@ -32,13 +32,13 @@ public class Parrucchiere {
 	@NotBlank
 	private String specializzazione;
 	
-	@NotBlank
-	private String numTelefono;
-	
 	private String img;
 	
 	@NotBlank
 	private String partitaIVA;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "parrucchiere")
+	private List<Servizio> servizi;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "parruchiere")
 	private List<Disponibilita> disponibilita;
@@ -69,14 +69,6 @@ public class Parrucchiere {
 
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
-	}
-
-	public String getNumTelefono() {
-		return numTelefono;
-	}
-
-	public void setNumTelefono(String numTelefono) {
-		this.numTelefono = numTelefono;
 	}
 
 	public String getSpecializzazione() {
@@ -111,7 +103,14 @@ public class Parrucchiere {
 	public void setPrenotazione(List<Prenotazione> prenotazioni) {
 		this.prenotazioni = prenotazioni;
 	}
+	
+	public List<Servizio> getServizi() {
+		return servizi;
+	}
 
+	public void setServizi(List<Servizio> servizi) {
+		this.servizi = servizi;
+	}
 	
 	public String getImg() {
 		return img;

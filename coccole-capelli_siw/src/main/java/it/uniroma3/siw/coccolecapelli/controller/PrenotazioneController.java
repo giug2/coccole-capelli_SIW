@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.polyspecialistcenter.aws.model.Professionista;
-
 import it.uniroma3.siw.coccolecapelli.controller.validator.PrenotazioneValidator;
 import it.uniroma3.siw.coccolecapelli.model.Disponibilita;
 import it.uniroma3.siw.coccolecapelli.model.Prenotazione;
 import it.uniroma3.siw.coccolecapelli.model.Parrucchiere;
+import it.uniroma3.siw.coccolecapelli.model.Servizio;
 import it.uniroma3.siw.coccolecapelli.model.User;
 import it.uniroma3.siw.coccolecapelli.service.DisponibilitaService;
 import it.uniroma3.siw.coccolecapelli.service.PrenotazioneService;
+import it.uniroma3.siw.coccolecapelli.service.ServizioService;
 import it.uniroma3.siw.coccolecapelli.service.UtenteService;
 
 @Controller
@@ -28,6 +28,9 @@ public class PrenotazioneController {
 	
 	@Autowired
 	private PrenotazioneService prenotazioneService;
+	
+	@Autowired
+	private ServizioService servizioService;
 	
 	@Autowired
 	private DisponibilitaService disponibilitaService;
@@ -48,36 +51,43 @@ public class PrenotazioneController {
 	
 	@GetMapping("/profile/prenotazione/add/{id}")
     public String addPrenotazione(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("servizi", this.servizioService.findAll());
         model.addAttribute("idUtente", id);
         return DIR_PAGES_PREN + "elencoServiziPrenotazione";
     }
 	
-	@GetMapping("/profile/prenotazione/disponibilita/{idU}")
+	@GetMapping("/profile/prenotazione/disponibilita/{idU}/{idS}")
 	public String selectDisponibilita(@PathVariable("idU") Long idUtente, 
+									  @PathVariable("idS") Long idServizio, 
 									  Model model) {
 		model.addAttribute("idUtente", idUtente);
+		model.addAttribute("idServizio", idServizio);
 		model.addAttribute("prenotazione", new Prenotazione());
 		
-		Professionista p = this.;
+		Parrucchiere p = this.servizioService.findById(idServizio).getParrucchiere();
+		
 		model.addAttribute("disponibilitaList", this.disponibilitaService.findByParrAndActive(p));
 		
 		
 		return DIR_PAGES_PREN + "elencoDisponibilitaPrenotazione";
 	}
 	
-	@GetMapping("/profile/prenotazione/add/{idU}/{idD}")
+	@GetMapping("/profile/prenotazione/add/{idU}/{idS}/{idD}")
 	public String addPrenotazione(@Valid @ModelAttribute("prenotazione") Prenotazione p,
 								  BindingResult bindingResult,
-								  @PathVariable("idU") Long idUtente,
+								  @PathVariable("idU") Long idUtente, 
+								  @PathVariable("idS") Long idServizio,
 								  @PathVariable("idD") Long idDisponibilita,
 								  Model model) {
 		
 		User u = this.utenteService.getUser(idUtente);
+		Servizio s = this.servizioService.findById(idServizio);
 		Disponibilita d = this.disponibilitaService.findById(idDisponibilita);
-		Parrucchiere parr = p.getParrucchiere();
+		Parrucchiere parr = s.getParrucchiere();
 		p.setParrucchiere(parr);
 		p.setCliente(u);
-		p.setDisponibilita(d); 
+		p.setDisponibilita(d);
+		p.setServizio(s); 
 		d.setActive(false);
 		
 		this.prenotazioneValidator.validate(p, bindingResult);
@@ -95,7 +105,7 @@ public class PrenotazioneController {
 		Prenotazione p = this.prenotazioneService.findById(id);
 		User u = p.getCliente();
 		Disponibilita d = p.getDisponibilita();
-		//Parrucchiere = p.getParrucchiere();
+		//Parrucchiere parr = p.getParrucchiere();
 		d.setActive(true);
 		
 		this.utenteService.deletePrenotazione(u, p);

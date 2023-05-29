@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.coccolecapelli.model.Servizio;
 import it.uniroma3.siw.coccolecapelli.model.Disponibilita;
 import it.uniroma3.siw.coccolecapelli.model.Parrucchiere;
 import it.uniroma3.siw.coccolecapelli.repository.ParrucchiereRepository;
@@ -51,6 +52,12 @@ public class ParrucchiereService {
 		this.parrucchiereRepository.save(p);
 	}
 	
+	
+	@Transactional
+	public void addServizio(Parrucchiere parrucchiere, Servizio servizio) {
+		parrucchiere.getServizi().add(servizio);
+		this.parrucchiereRepository.save(parrucchiere);
+	}
 	
 	@Transactional
 	public void addDisponibilita(Parrucchiere parrucchiere, Disponibilita disponibilita) {

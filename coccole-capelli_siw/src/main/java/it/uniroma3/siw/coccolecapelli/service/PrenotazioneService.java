@@ -17,7 +17,7 @@ public class PrenotazioneService {
 	private PrenotazioneRepository prenotazioneRepository;
 	
 	public boolean alreadyExists(Prenotazione target) {
-		return this.prenotazioneRepository.existsByParrucchiereAndDisponibilitaAndCliente(target.getParrucchiere(), target.getDisponibilita(), target.getCliente());
+		return this.prenotazioneRepository.existsByParrucchiereAndServizioAndDisponibilitaAndCliente(target.getParrucchiere(), target.getServizio(), target.getDisponibilita(), target.getCliente());
 	}
 	
 	public Prenotazione findById(Long id) {

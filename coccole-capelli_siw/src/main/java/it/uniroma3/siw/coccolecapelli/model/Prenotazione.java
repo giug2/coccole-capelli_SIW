@@ -24,6 +24,9 @@ public class Prenotazione {
 	
 	@ManyToOne
 	private User cliente;
+	
+	@ManyToOne
+	private Servizio servizio;
 
 	public Long getId() {
 		return id;
@@ -39,6 +42,14 @@ public class Prenotazione {
 
 	public void setParrucchiere(Parrucchiere parrucchiere) {
 		this.parrucchiere = parrucchiere;
+	}
+	
+	public Servizio getServizio() {
+		return servizio;
+	}
+
+	public void setServizio(Servizio servizio) {
+		this.servizio = servizio;
 	}
 
 

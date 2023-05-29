@@ -45,7 +45,7 @@ public class DisponibilitaController {
 	/* METHODS ADMIN */
 	
 	@GetMapping("/admin/disponibilita/{id}")
-	public String getAdminDisponibilitaProfessionista(@PathVariable("id") Long id, Model model) {
+	public String getAdminDisponibilitaParrucchiere(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("disponibilitaList", this.disponibilitaService.findByParrAndActive(this.parrucchiereService.findById(id)));
 		model.addAttribute("idProfessionista", id);
 		return DIR_ADMIN_PAGES_DISP + "adminElencoDisponibilita";

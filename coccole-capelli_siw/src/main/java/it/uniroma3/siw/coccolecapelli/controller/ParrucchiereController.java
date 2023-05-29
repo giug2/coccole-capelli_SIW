@@ -139,7 +139,7 @@ public class ParrucchiereController {
 	}
 	
 	@PostMapping("/admin/parrucchiere/changeImg/{idParr}")
-	public String changeImgChef(@PathVariable("idParr") Long idParr,
+	public String changeImgParr(@PathVariable("idParr") Long idParr,
 			   					@RequestParam("file") MultipartFile file, 
 			   					Model model) {
 		
