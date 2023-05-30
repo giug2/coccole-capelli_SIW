@@ -74,5 +74,4 @@ public class Credentials {
 	public void setUtente(User utente) {
 		this.utente = utente;
 	}
-	
 }

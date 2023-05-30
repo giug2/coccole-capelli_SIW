@@ -17,7 +17,7 @@ public class Prenotazione {
 	private Long id;
 	
 	@ManyToOne
-	private Parrucchiere parrucchiere;
+	private Dipendente dipendente;
 	
 	@OneToOne
 	private Disponibilita disponibilita;
@@ -36,12 +36,12 @@ public class Prenotazione {
 		this.id = id;
 	}
 
-	public Parrucchiere getParrucchiere() {
-		return parrucchiere;
+	public Dipendente getDipendente() {
+		return dipendente;
 	}
 
-	public void setParrucchiere(Parrucchiere parrucchiere) {
-		this.parrucchiere = parrucchiere;
+	public void setDipendente(Dipendente dipendente) {
+		this.dipendente = dipendente;
 	}
 	
 	public Servizio getServizio() {
@@ -68,5 +68,4 @@ public class Prenotazione {
 	public void setCliente(User cliente) {
 		this.cliente = cliente;
 	}
-
 }

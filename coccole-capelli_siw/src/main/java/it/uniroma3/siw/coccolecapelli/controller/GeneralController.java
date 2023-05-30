@@ -7,21 +7,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import it.uniroma3.siw.coccolecapelli.service.ServizioService;
 
-import it.uniroma3.siw.coccolecapelli.service.ParrucchiereService;
+import it.uniroma3.siw.coccolecapelli.service.DipendenteService;
 @Controller
 public class GeneralController {
-
 
 	@Autowired
 	private ServizioService servizioService;
 	
 	@Autowired
-	private ParrucchiereService parrucchiereService;
+	private DipendenteService dipendenteService;
 
 	@GetMapping("/")
-	public String getServiziAndParrucchieri(Model model) {
+	public String getServiziAndDipendente(Model model) {
 		
-		model.addAttribute("parrucchieri", this.parrucchiereService.findLastParrucchieri());
+		model.addAttribute("dipendente", this.dipendenteService.findLastDipendente());
 		model.addAttribute("servizi", this.servizioService.findLastServizi());
 		
 		return "index";
@@ -29,7 +28,7 @@ public class GeneralController {
 	
 	@GetMapping("/admin")
 	public String get() {
-		return "redirect:/admin/parrucchieri";
+		return "redirect:/admin/dipendente";
 	}
 	
 }

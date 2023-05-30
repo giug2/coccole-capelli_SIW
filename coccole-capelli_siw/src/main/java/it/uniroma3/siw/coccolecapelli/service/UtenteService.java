@@ -51,5 +51,4 @@ public class UtenteService {
 		u.getPrenotazioni().remove(prenotazione);
 		this.utenteRepository.save(u);
 	}
-	
 }

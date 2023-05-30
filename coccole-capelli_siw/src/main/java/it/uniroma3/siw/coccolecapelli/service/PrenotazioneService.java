@@ -17,7 +17,7 @@ public class PrenotazioneService {
 	private PrenotazioneRepository prenotazioneRepository;
 	
 	public boolean alreadyExists(Prenotazione target) {
-		return this.prenotazioneRepository.existsByParrucchiereAndServizioAndDisponibilitaAndCliente(target.getParrucchiere(), target.getServizio(), target.getDisponibilita(), target.getCliente());
+		return this.prenotazioneRepository.existsByDipendenteAndServizioAndDisponibilitaAndCliente(target.getDipendente(), target.getServizio(), target.getDisponibilita(), target.getCliente());
 	}
 	
 	public Prenotazione findById(Long id) {
@@ -28,7 +28,7 @@ public class PrenotazioneService {
 		this.prenotazioneRepository.delete(p);
 	}
 	
-	/* public List<Prenotazione> prenotazioniValide(List<Prenotazione> lista) {
+	public List<Prenotazione> prenotazioniValide(List<Prenotazione> lista) {
 		Iterator<Prenotazione> i = lista.iterator();
 		while(i.hasNext()) {
 			Prenotazione p = i.next();
@@ -39,8 +39,6 @@ public class PrenotazioneService {
 			
 			i.next();
 		}
-		
 		return lista;
-	} */
-
+	}
 }

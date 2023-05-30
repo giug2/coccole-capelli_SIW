@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.coccolecapelli.controller.validator.ServizioValidator;
-import it.uniroma3.siw.coccolecapelli.model.Parrucchiere;
+import it.uniroma3.siw.coccolecapelli.model.Dipendente;
 import it.uniroma3.siw.coccolecapelli.model.Servizio;
-import it.uniroma3.siw.coccolecapelli.service.ParrucchiereService;
+import it.uniroma3.siw.coccolecapelli.service.DipendenteService;
 import it.uniroma3.siw.coccolecapelli.service.ServizioService;
 import it.uniroma3.siw.coccolecapelli.utility.FileStore;
 
@@ -34,7 +34,7 @@ public class ServizioController {
 	private ServizioValidator servizioValidator;
 	
 	@Autowired
-	private ParrucchiereService parrucchiereService;
+	private DipendenteService dipendenteService;
 	
 	/* METHODS GENERIC_USER */
 	
@@ -56,9 +56,9 @@ public class ServizioController {
 	/* METHODS ADMIN */
 	
 	@GetMapping("/admin/servizi/{id}")
-	public String getServiziOfParrucchiere(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("servizi", this.parrucchiereService.findById(id).getServizi());
-		model.addAttribute("idParrucchiere", id);
+	public String getServiziOfDipendente(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("servizi", this.dipendenteService.findById(id).getServizi());
+		model.addAttribute("idDipendente", id);
 		return DIR_ADMIN_PAGES_SERVIZIO + "adminElencoServizi";
 	}
 	
@@ -79,12 +79,12 @@ public class ServizioController {
 							  @RequestParam("file") MultipartFile file,
 							  Model model) {
 		
-		Parrucchiere parrucchiere = parrucchiereService.findById(id);
-		servizio.setParrucchiere(parrucchiere);
+		Dipendente dipendente = dipendenteService.findById(id);
+		servizio.setDipendente(dipendente);
 		this.servizioValidator.validate(servizio, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			servizio.setImg(FileStore.store(file,DIR_FOLDER_IMG));
-			this.parrucchiereService.addServizio(parrucchiere, servizio);
+			this.dipendenteService.addServizio(dipendente, servizio);
 			
 			return "redirect:/admin/servizi/" + id;
 		}
@@ -98,12 +98,12 @@ public class ServizioController {
 	@GetMapping("/admin/servizio/delete/{id}")
 	public String deleteServizio(@PathVariable("id") Long id, Model model) {
 		Servizio servizio = this.servizioService.findById(id);
-		Parrucchiere parrucchiere = this.parrucchiereService.findById(servizio.getParrucchiere().getId());
-		parrucchiere.getServizi().remove(servizio);
+		Dipendente dipendente = this.dipendenteService.findById(servizio.getDipendente().getId());
+		dipendente.getServizi().remove(servizio);
 		this.servizioService.delete(servizio);
-		this.parrucchiereService.save(parrucchiere);
+		this.dipendenteService.save(dipendente);
 		
-		return "redirect:/admin/servizi/" + parrucchiere.getId();
+		return "redirect:/admin/servizi/" + dipendente.getId();
 	}
 	
 	// --- MODIFICA
@@ -122,7 +122,7 @@ public class ServizioController {
 							   Model model) {
 		
 		Servizio s = this.servizioService.findById(id);
-		servizio.setParrucchiere(s.getParrucchiere());
+		servizio.setDipendente(s.getDipendente());
 		
 		if(servizio.getNome().equals(s.getNome())) {
 			servizio.setNome("nomeSerDef");
@@ -136,14 +136,14 @@ public class ServizioController {
 		if(!bindingResult.hasErrors()) {
 			this.servizioService.update(s, servizio);
 			
-			return "redirect:/admin/servizi/" + servizio.getParrucchiere().getId();
+			return "redirect:/admin/servizi/" + servizio.getDipendente().getId();
 		}
 		servizio.setImg(s.getImg());
 		return DIR_ADMIN_PAGES_SERVIZIO + "editServizio";
 	}
 	
 	@PostMapping("/admin/servizio/changeImg/{idS}")
-	public String changeImgParr(@PathVariable("idS") Long idS,
+	public String changeImgDipendente(@PathVariable("idS") Long idS,
 			   					@RequestParam("file") MultipartFile file, 
 			   					Model model) {
 		

@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.coccolecapelli.controller.validator.DisponibilitaValidator;
 import it.uniroma3.siw.coccolecapelli.model.Disponibilita;
-import it.uniroma3.siw.coccolecapelli.model.Parrucchiere;
+import it.uniroma3.siw.coccolecapelli.model.Dipendente;
 import it.uniroma3.siw.coccolecapelli.service.DisponibilitaService;
-import it.uniroma3.siw.coccolecapelli.service.ParrucchiereService;
+import it.uniroma3.siw.coccolecapelli.service.DipendenteService;
 
 @Controller
 public class DisponibilitaController {
@@ -30,14 +30,14 @@ public class DisponibilitaController {
 	private DisponibilitaValidator disponibilitaValidator;
 	
 	@Autowired
-	private ParrucchiereService parrucchiereService;
+	private DipendenteService dipendenteService;
 	
 	
 	/* METHODS GENERIC_USER */
 	
 	@GetMapping("/disponibilita/{id}")
 	public String getDisponibilitaProfessionista(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("disponibilitaList", this.disponibilitaService.findByParrAndActive(this.parrucchiereService.findById(id)));
+		model.addAttribute("disponibilitaList", this.disponibilitaService.findByDipendenteAndActive(this.dipendenteService.findById(id)));
 		
 		return DIR_PAGES_DISP + "elencoDisponibilita";
 	}
@@ -45,9 +45,9 @@ public class DisponibilitaController {
 	/* METHODS ADMIN */
 	
 	@GetMapping("/admin/disponibilita/{id}")
-	public String getAdminDisponibilitaParrucchiere(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("disponibilitaList", this.disponibilitaService.findByParrAndActive(this.parrucchiereService.findById(id)));
-		model.addAttribute("idProfessionista", id);
+	public String getAdminDisponibilitaDipendente(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("disponibilitaList", this.disponibilitaService.findByDipendenteAndActive(this.dipendenteService.findById(id)));
+		model.addAttribute("idDipendente", id);
 		return DIR_ADMIN_PAGES_DISP + "adminElencoDisponibilita";
 	}
 	
@@ -55,7 +55,7 @@ public class DisponibilitaController {
 	
 	@GetMapping("/admin/disponibilita/add/{id}")
 	public String addGetDisponibilita(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("idParrucchiere", id);
+		model.addAttribute("idDipendente", id);
 		model.addAttribute("disponibilita", new Disponibilita());
 		
 		return DIR_ADMIN_PAGES_DISP + "disponibilitaForm";
@@ -65,14 +65,14 @@ public class DisponibilitaController {
 	public String addDisponibilita(@Valid @ModelAttribute("disponibilita") Disponibilita disponibilita, BindingResult bindingResult, 
 									@PathVariable("id") Long id, Model model) {
 		
-		Parrucchiere parrucchiere = this.parrucchiereService.findById(id);
-		disponibilita.setParrucchiere(parrucchiere);
+		Dipendente dipendente = this.dipendenteService.findById(id);
+		disponibilita.setDipendente(dipendente);
 		disponibilita.setActive(true);
 		this.disponibilitaValidator.validate(disponibilita, bindingResult);
 		
 		if(!bindingResult.hasErrors()) {
-			this.parrucchiereService.addDisponibilita(parrucchiere, disponibilita);
-			return this.getAdminDisponibilitaParrucchiere(id, model);
+			this.dipendenteService.addDisponibilita(dipendente, disponibilita);
+			return this.getAdminDisponibilitaDipendente(id, model);
 		}
 		
 		model.addAttribute("id", id);
@@ -84,13 +84,13 @@ public class DisponibilitaController {
 	@GetMapping("/admin/disponibilita/delete/{id}")
 	public String deleteDisponibilita(@PathVariable("id") Long id, Model model) {
 		Disponibilita disponibilita = this.disponibilitaService.findById(id);		
-		Parrucchiere p = this.parrucchiereService.findById(disponibilita.getParrucchiere().getId());
+		Dipendente d = this.dipendenteService.findById(disponibilita.getDipendente().getId());
 		
-		p.getDisponibilita().remove(disponibilita);
+		d.getDisponibilita().remove(disponibilita);
 		this.disponibilitaService.delete(disponibilita);
-		this.parrucchiereService.save(p);	
+		this.dipendenteService.save(d);	
 		
-		return "redirect:/admin/disponibilita/" + p.getId();
+		return "redirect:/admin/disponibilita/" + d.getId();
 	}
 	
 	// --- MODIFICA
@@ -109,13 +109,13 @@ public class DisponibilitaController {
 								   Model model) {
 		
 		Disponibilita d = this.disponibilitaService.findById(id);
-		disponibilita.setParrucchiere(d.getParrucchiere());
+		disponibilita.setDipendente(d.getDipendente());
 		this.disponibilitaValidator.validate(disponibilita, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			
 			this.disponibilitaService.update(d, disponibilita);
 			
-			return this.getAdminDisponibilitaParrucchiere(d.getParrucchiere().getId(), model);
+			return this.getAdminDisponibilitaDipendente(d.getDipendente().getId(), model);
 		}
 		
 		disponibilita.setId(id);

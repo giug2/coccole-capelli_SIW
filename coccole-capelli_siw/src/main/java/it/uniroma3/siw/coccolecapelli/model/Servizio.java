@@ -14,7 +14,6 @@ public class Servizio {
 	
 	public static final String DIR_PAGES_SERVIZIO = "information/servizio/";
 	public static final String DIR_ADMIN_PAGES_SERVIZIO = "admin/servizio/";
-	
 	public static final String DIR_FOLDER_IMG = "servizio/profili";
 	
 	@Id
@@ -33,7 +32,7 @@ public class Servizio {
 	private String img;
 	
 	@ManyToOne
-	private Parrucchiere parrucchiere;
+	private Dipendente dipendente;
 	
 	public Long getId() {
 		return id;
@@ -67,12 +66,12 @@ public class Servizio {
 		this.prezzo = prezzo;
 	}
 
-	public Parrucchiere getParrucchiere() {
-		return parrucchiere;
+	public Dipendente getDipendente() {
+		return dipendente;
 	}
 
-	public void setParrucchiere(Parrucchiere parrucchiere) {
-		this.parrucchiere = parrucchiere;
+	public void setDipendente(Dipendente dipendente) {
+		this.dipendente = dipendente;
 	}
 
 	public String getImg() {

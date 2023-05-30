@@ -33,5 +33,4 @@ public class DisponibilitaValidator implements Validator {
 		if(this.disponibilitaService.alreadyExists((Disponibilita) target))
 			errors.reject("duplicate.disponibilita");
 	}
-
 }

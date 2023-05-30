@@ -23,7 +23,7 @@ public class ServizioService {
 	
 	
 	public boolean alreadyExists(Servizio target) {
-		return this.servizioRepository.existsByNomeAndParrucchiere(target.getNome(), target.getParrucchiere());
+		return this.servizioRepository.existsByNomeAndDipendente(target.getNome(), target.getDipendente());
 	}
 	
 	@Transactional

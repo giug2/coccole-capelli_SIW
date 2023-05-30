@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import it.uniroma3.siw.coccolecapelli.model.Parrucchiere;
+import it.uniroma3.siw.coccolecapelli.model.Dipendente;
 
-public interface ParrucchiereRepository extends CrudRepository<Parrucchiere, Long> {
+public interface DipendenteRepository extends CrudRepository<Dipendente, Long> {
 
 	boolean existsByPartitaIVA(String partitaIVA);
 
-	@Query(value = "SELECT * FROM parrucchiere order by id limit :limit", nativeQuery = true)
-	public List<Parrucchiere> findTopN(@Param("limit") int limit);
+	@Query(value = "SELECT * FROM dipendente order by id limit :limit", nativeQuery = true)
+	public List<Dipendente> findTopN(@Param("limit") int limit);
 
 }

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.coccolecapelli.model.Disponibilita;
-import it.uniroma3.siw.coccolecapelli.model.Parrucchiere;
+import it.uniroma3.siw.coccolecapelli.model.Dipendente;
 import it.uniroma3.siw.coccolecapelli.repository.DisponibilitaRepository;
 
 @Service
@@ -18,19 +18,19 @@ public class DisponibilitaService {
 	private DisponibilitaRepository disponibilitaRepository;
 	
 	public boolean alreadyExists(Disponibilita target) {
-		return this.disponibilitaRepository.existsByDataAndOraInizioAndOraFineAndParrucchiere(target.getData(), target.getOraInizio(), target.getOraFine(), target.getParrucchiere());
+		return this.disponibilitaRepository.existsByDataAndOraInizioAndOraFineAndDipendente(target.getData(), target.getOraInizio(), target.getOraFine(), target.getDipendente());
 	}
 
 	public Disponibilita findById(Long idDisponibilita) {
 		return this.disponibilitaRepository.findById(idDisponibilita).get();
 	}
 	
-	public List<Disponibilita> findByParrAndActive(Parrucchiere parrucchiere) {
-		return this.disponibilitaRepository.findByParrucchiereAndActiveTrueOrderByDataAscOraInizio(parrucchiere);
+	public List<Disponibilita> findByDipendenteAndActive(Dipendente dipendente) {
+		return this.disponibilitaRepository.findByDipendenteAndActiveTrueOrderByDataAscOraInizio(dipendente);
 	}
 	
-	public List<Disponibilita> findByParrucchiere(Parrucchiere parrucchiere) {
-		return this.disponibilitaRepository.findByParrucchiere(parrucchiere);
+	public List<Disponibilita> findByDipendente(Dipendente dipendente) {
+		return this.disponibilitaRepository.findByDipendente(dipendente);
 	}
 	
 	@Transactional
@@ -45,5 +45,4 @@ public class DisponibilitaService {
 	public void delete(Disponibilita disponibilita) {
 		this.disponibilitaRepository.delete(disponibilita);
 	}
-
 }

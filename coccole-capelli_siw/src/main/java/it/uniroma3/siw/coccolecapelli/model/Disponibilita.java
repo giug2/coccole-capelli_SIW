@@ -26,10 +26,10 @@ public class Disponibilita {
 	@NotBlank
 	private String oraFine;
 	
-	private boolean active;
+	private boolean occupata;
 	
 	@ManyToOne
-	private Parrucchiere parrucchiere;
+	private Dipendente dipendente;
 	
 	public Long getId() {
 		return id;
@@ -63,20 +63,19 @@ public class Disponibilita {
 		this.oraFine = oraFine;
 	}
 
-	public Parrucchiere getParrucchiere() {
-		return parrucchiere;
+	public Dipendente getDipendente() {
+		return dipendente;
 	}
 
-	public void setParrucchiere(Parrucchiere parrucchiere) {
-		this.parrucchiere = parrucchiere;
+	public void setDipendente(Dipendente dipendente) {
+		this.dipendente = dipendente;
 	}
 
 	public boolean isActive() {
-		return active;
+		return occupata;
 	}
 
 	public void setActive(boolean active) {
-		this.active = active;
+		this.occupata = active;
 	}
-	
 }

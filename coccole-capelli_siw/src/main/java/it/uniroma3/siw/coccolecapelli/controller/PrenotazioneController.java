@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import it.uniroma3.siw.coccolecapelli.controller.validator.PrenotazioneValidator;
 import it.uniroma3.siw.coccolecapelli.model.Disponibilita;
 import it.uniroma3.siw.coccolecapelli.model.Prenotazione;
-import it.uniroma3.siw.coccolecapelli.model.Parrucchiere;
+import it.uniroma3.siw.coccolecapelli.model.Dipendente;
 import it.uniroma3.siw.coccolecapelli.model.Servizio;
 import it.uniroma3.siw.coccolecapelli.model.User;
 import it.uniroma3.siw.coccolecapelli.service.DisponibilitaService;
@@ -64,10 +64,9 @@ public class PrenotazioneController {
 		model.addAttribute("idServizio", idServizio);
 		model.addAttribute("prenotazione", new Prenotazione());
 		
-		Parrucchiere p = this.servizioService.findById(idServizio).getParrucchiere();
+		Dipendente p = this.servizioService.findById(idServizio).getDipendente();
 		
-		model.addAttribute("disponibilitaList", this.disponibilitaService.findByParrAndActive(p));
-		
+		model.addAttribute("disponibilitaList", this.disponibilitaService.findByDipendenteAndActive(p));
 		
 		return DIR_PAGES_PREN + "elencoDisponibilitaPrenotazione";
 	}
@@ -83,8 +82,8 @@ public class PrenotazioneController {
 		User u = this.utenteService.getUser(idUtente);
 		Servizio s = this.servizioService.findById(idServizio);
 		Disponibilita d = this.disponibilitaService.findById(idDisponibilita);
-		Parrucchiere parr = s.getParrucchiere();
-		p.setParrucchiere(parr);
+		Dipendente dip = s.getDipendente();
+		p.setDipendente(dip);
 		p.setCliente(u);
 		p.setDisponibilita(d);
 		p.setServizio(s); 
@@ -113,5 +112,4 @@ public class PrenotazioneController {
 		
 		return "redirect:/profile/prenotazioni/" + u.getId();
 	}
-	
 }

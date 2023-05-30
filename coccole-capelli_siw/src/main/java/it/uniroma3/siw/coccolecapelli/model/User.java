@@ -1,5 +1,6 @@
 package it.uniroma3.siw.coccolecapelli.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -28,8 +29,8 @@ public class User{
 	@NotBlank
 	private String cognome;
 	
-	/*@NotBlank
-	private LocalDate dataDiNascita;*/
+	@NotBlank
+	private LocalDate dataDiNascita;
 	
 	private String img;
 	
@@ -63,13 +64,13 @@ public class User{
 		this.cognome = cognome;
 	}
 	
-	/*public LocalDate getDataDiNascita() {
+	public LocalDate getDataDiNascita() {
 		return dataDiNascita;
 	}
 
 	public void setDataDiNascita(LocalDate dataDiNascita) {
 		this.dataDiNascita = dataDiNascita;
-	}*/
+	}
 
 	public String getImg() {
 		return img;
@@ -94,7 +95,4 @@ public class User{
 	public void setPrenotazioni(List<Prenotazione> prenotazioni) {
 		this.prenotazioni = prenotazioni;
 	}
-
 }
-
-

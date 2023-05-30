@@ -9,5 +9,4 @@ public class CoccoleCapelliSiwApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CoccoleCapelliSiwApplication.class, args);
 	}
-
 }

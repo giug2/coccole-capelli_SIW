@@ -5,24 +5,24 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import it.uniroma3.siw.coccolecapelli.model.Parrucchiere;
-import it.uniroma3.siw.coccolecapelli.service.ParrucchiereService;
+import it.uniroma3.siw.coccolecapelli.model.Dipendente;
+import it.uniroma3.siw.coccolecapelli.service.DipendenteService;
 
 @Component
-public class ParrucchiereValidator implements Validator {
+public class DipendenteValidator implements Validator {
 
 	@Autowired
-	private ParrucchiereService parrucchiereService;
+	private DipendenteService dipendenteService;
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return Parrucchiere.class.equals(clazz);
+		return Dipendente.class.equals(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		if(parrucchiereService.alreadyExists((Parrucchiere) target))
-			errors.reject("duplicate.parrucchiere");
+		if(dipendenteService.alreadyExists((Dipendente) target))
+			errors.reject("duplicate.dipendente");
 	}
 
 }

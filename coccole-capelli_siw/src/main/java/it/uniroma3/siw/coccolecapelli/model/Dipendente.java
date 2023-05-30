@@ -11,11 +11,11 @@ import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-public class Parrucchiere {
+public class Dipendente {
 	
-	public static final String DIR_PAGES_PARR = "information/parrucchiere/";
-	public static final String DIR_ADMIN_PAGES_PARR = "admin/parrucchiere/";
-	public static final String DIR_FOLDER_IMG = "parruchiere/profili";
+	public static final String DIR_PAGES_PARR = "information/dipendente/";
+	public static final String DIR_ADMIN_PAGES_PARR = "admin/dipendente/";
+	public static final String DIR_FOLDER_IMG = "dipendente/profili";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,13 +35,13 @@ public class Parrucchiere {
 	@NotBlank
 	private String partitaIVA;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "parrucchiere")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "dipendente")
 	private List<Servizio> servizi;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "parrucchiere")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "dipendente")
 	private List<Disponibilita> disponibilita;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "parrucchiere")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "dipendente")
 	private List<Prenotazione> prenotazioni; 
 
 
@@ -125,5 +125,4 @@ public class Parrucchiere {
 	public void setPartitaIVA(String partitaIVA) {
 		this.partitaIVA = partitaIVA;
 	}
-	
 }
