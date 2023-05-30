@@ -15,7 +15,6 @@ public class Parrucchiere {
 	
 	public static final String DIR_PAGES_PARR = "information/parrucchiere/";
 	public static final String DIR_ADMIN_PAGES_PARR = "admin/parrucchiere/";
-	
 	public static final String DIR_FOLDER_IMG = "parruchiere/profili";
 	
 	@Id
@@ -24,7 +23,6 @@ public class Parrucchiere {
 	
 	@NotBlank
 	private String nome;
-	
 	
 	@NotBlank
 	private String cognome;
@@ -40,7 +38,7 @@ public class Parrucchiere {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "parrucchiere")
 	private List<Servizio> servizi;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "parruchiere")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "parrucchiere")
 	private List<Disponibilita> disponibilita;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "parrucchiere")
