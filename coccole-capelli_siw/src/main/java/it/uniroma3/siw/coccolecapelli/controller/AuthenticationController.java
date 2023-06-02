@@ -53,13 +53,13 @@ public class AuthenticationController {
 	public String showRegisterForm(Model model) {
 		model.addAttribute("utente", new User());
 		model.addAttribute("credentials", new Credentials());
-		return "authentication/registerForm";
+		return "autenticazione/formRegisterUser";
 	}
 	
 	@GetMapping("/login")
 	//@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String showLoginForm(Model model) {
-		return "authentication/loginForm";
+		return "autenticazione/formlogin";
 	}
 	
 	@GetMapping("/logout")
@@ -74,7 +74,7 @@ public class AuthenticationController {
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
 		if(credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-			return "redirect:/admin/parrucchieri";
+			return "redirect:/admin/autenticazione/profile.html";
 		}
 		
 		return this.profileUser(model);
@@ -95,10 +95,10 @@ public class AuthenticationController {
 			user.setImg("icon-default-user.png");
 			credentials.setUtente(user);
 			credentialsService.saveCredentials(credentials);
-			return "authentication/registrationSuccessful";
+			return "autenticazione/registrationSuccessful";
 		}
 		
-		return "authentication/registerForm";
+		return "autenticazione/formRegisterUser";
 	}
 	
 	/*//vai alla pagin index (o admin dashboard) dopo il login con OAuth ***DA MODELLARE BENE SE SI RITIENE UTILE***
@@ -116,7 +116,7 @@ public class AuthenticationController {
 		User user = utenteService.getUser(credentials.getUtente().getId());
 		model.addAttribute("user", user);
 		model.addAttribute("credentials", credentials);
-		return "authentication/profile";
+		return "autenticazione/profile";
 	}
 	
 	@PostMapping("/changeUserAndPass/{idCred}")
@@ -144,12 +144,12 @@ public class AuthenticationController {
 			model.addAttribute("user", user);
 			model.addAttribute("credentials", c);
 			model.addAttribute("okChange", true);
-			return "authentication/profile";
+			return "autenticazione/profile";
 		}	
 		model.addAttribute("user", user);
 		model.addAttribute("credentials", credentials);
 		model.addAttribute("okChange", false);
-		return "authentication/profile";
+		return "autenticazione/profile";
 	}
 	
 	@PostMapping("/changeImgProfile/{idUser}")

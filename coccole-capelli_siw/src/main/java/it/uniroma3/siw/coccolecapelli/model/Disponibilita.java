@@ -26,7 +26,7 @@ public class Disponibilita {
 	@NotBlank
 	private String oraFine;
 	
-	private boolean occupata;
+	private boolean active;
 	
 	@ManyToOne
 	private Dipendente dipendente;
@@ -72,10 +72,10 @@ public class Disponibilita {
 	}
 
 	public boolean isActive() {
-		return occupata;
+		return active;
 	}
 
 	public void setActive(boolean active) {
-		this.occupata = active;
+		this.active = active;
 	}
 }
