@@ -13,8 +13,8 @@ import jakarta.validation.constraints.NotBlank;
 @Entity
 public class Dipendente {
 	
-	public static final String DIR_PAGES_PARR = "information/dipendente/";
-	public static final String DIR_ADMIN_PAGES_PARR = "admin/dipendente/";
+	public static final String DIR_PAGES_DIP = "information/dipendente/";
+	public static final String DIR_ADMIN_PAGES_DIP = "admin/dipendente/";
 	public static final String DIR_FOLDER_IMG = "dipendente/profili";
 	
 	@Id

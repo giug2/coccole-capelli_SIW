@@ -1,8 +1,8 @@
 package it.uniroma3.siw.coccolecapelli.controller;
 
-import static it.uniroma3.siw.coccolecapelli.model.Dipendente.DIR_ADMIN_PAGES_PARR;
+import static it.uniroma3.siw.coccolecapelli.model.Dipendente.DIR_ADMIN_PAGES_DIP;
 import static it.uniroma3.siw.coccolecapelli.model.Dipendente.DIR_FOLDER_IMG;
-import static it.uniroma3.siw.coccolecapelli.model.Dipendente.DIR_PAGES_PARR;
+import static it.uniroma3.siw.coccolecapelli.model.Dipendente.DIR_PAGES_DIP;
 
 import jakarta.validation.Valid;
 
@@ -39,14 +39,14 @@ public class DipendenteController {
 		Dipendente dipendente = dipendenteService.findById(id);
 		model.addAttribute("dipendente", dipendente);
 		
-		return DIR_PAGES_PARR + "dipendente";
+		return DIR_PAGES_DIP + "dipendente";
 	}
 	
 	@GetMapping("/dipendenti")
 	public String getDipendenti(Model model) {
 		model.addAttribute("dipendenti", this.dipendenteService.findAll());
 		
-		return DIR_PAGES_PARR + "elencoDipendenti";
+		return DIR_PAGES_DIP + "elencoDipendenti";
 	}
 	
 	/* METHODS ADMIN */
@@ -56,14 +56,14 @@ public class DipendenteController {
 		Dipendente dipendente = dipendenteService.findById(id);
 		model.addAttribute("dipendente", dipendente);
 		
-		return DIR_ADMIN_PAGES_PARR + "adminDipendente";
+		return DIR_ADMIN_PAGES_DIP + "adminDipendente";
 	}
 	
 	@GetMapping("/admin/dipendenti")
 	public String getAdminDipendenti(Model model) {
 		model.addAttribute("dipendenti", this.dipendenteService.findAll());
 		
-		return DIR_ADMIN_PAGES_PARR + "adminElencoDipendenti";
+		return DIR_ADMIN_PAGES_DIP + "adminElencoDipendenti";
 	}
 	
 	// --- INSERIMENTO
@@ -72,7 +72,7 @@ public class DipendenteController {
 	public String addDipendente(Model model) {
 		model.addAttribute("dipendente", new Dipendente());
 		
-		return DIR_ADMIN_PAGES_PARR + "dipendenteForm";
+		return DIR_ADMIN_PAGES_DIP + "dipendenteForm";
 	}
 	
 	@PostMapping("/admin/dipendente/add")
@@ -89,7 +89,7 @@ public class DipendenteController {
 			return this.getAdminDipendenti(model);
 		}
 		
-		return DIR_ADMIN_PAGES_PARR + "dipendenteForm";
+		return DIR_ADMIN_PAGES_DIP + "dipendenteForm";
 	}
 	
 	
@@ -111,7 +111,7 @@ public class DipendenteController {
 	@GetMapping("/admin/dipendente/edit/{id}")
 	public String getEditDipendente(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("dipendente",this.dipendenteService.findById(id));	
-		return DIR_ADMIN_PAGES_PARR + "editDipendente";
+		return DIR_ADMIN_PAGES_DIP + "editDipendente";
 	}
 	
 	@PostMapping("/admin/dipendente/edit/{id}")
@@ -135,7 +135,7 @@ public class DipendenteController {
 			return this.getAdminDipendenti(model);
 		}
 		dipendente.setImg(d.getImg());
-		return  DIR_ADMIN_PAGES_PARR + "editDipendente";
+		return  DIR_ADMIN_PAGES_DIP + "editDipendente";
 	}
 	
 	@PostMapping("/admin/dipendente/changeImg/{idDip}")
