@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: headerfiles(title='Aggiungi Professionista')"> </head>
+<head th:replace="fragments/layout.html :: headerfiles(title='Aggiungi Dipendente')"> </head>
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 
 	<section class="generic_section layout_padding">
 		<div class="container">
 			<div class="mb-4">
-				<h2>Aggiungi Nuovo Professionista</h2>
+				<h2>Aggiungi Nuovo Dipendente</h2>
 			</div>
 
 
 			<div class="form_container mb-5">
-				<form th:action="@{/admin/professionista/add}" method="post" th:object="${professionista}" enctype="multipart/form-data">
+				<form th:action="@{/admin/dipendente/add}" method="post" th:object="${dipendente}" enctype="multipart/form-data">
 					<div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
 						<h4 align="center" th:each="err : ${#fields.globalErrors()}" th:text="'Errore: ' + ${err}">...</h4>
 					</div>
@@ -22,8 +22,8 @@
 					<div class="form-group"><input type="text" class="form-control" placeholder="Cognome" th:field="*{cognome}"></div>
 					<div th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}" class="alert alert-danger" role="alert"></div>
 
-					<div class="form-group"><input type="text" class="form-control" placeholder="Professione" th:field="*{professione}"></div>
-					<div th:if="${#fields.hasErrors('professione')}" th:errors="*{professione}" class="alert alert-danger" role="alert"></div>
+					<div class="form-group"><input type="text" class="form-control" placeholder="Specializzazione" th:field="*{specializzazione}"></div>
+					<div th:if="${#fields.hasErrors('specializzazione')}" th:errors="*{specializzazione}" class="alert alert-danger" role="alert"></div>
 
 					<div class="form-group"><input type="text" class="form-control" placeholder="Partita IVA" th:field="*{partitaIVA}">
 					</div>
