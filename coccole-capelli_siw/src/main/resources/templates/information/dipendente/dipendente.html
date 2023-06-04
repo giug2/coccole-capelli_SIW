@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: headerfiles(title='Profilo Professionista')"></head>
+<head th:replace="fragments/layout.html :: headerfiles(title='Profilo Dipendente')"></head>
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 	
 	<section class="user-background informations-section ">
 		<div class="img-profile-informations" >
-			<img th:src="'/images/professionista/profili/' + ${professionista.img}" alt="Profile Professionista">
+			<img th:src="'/images/dipendente/profili/' + ${dipendente.img}" alt="Profile Dipendente">
 		</div>
 	</section>
 
@@ -14,7 +14,7 @@
 	<section class="generic_section">
 		<div class="container">
 			<div class="mb-4">
-				<h2>Professionista</h2>
+				<h2>Dipendente</h2>
 			</div>
 
 

@@ -17,7 +17,7 @@
 						<tr>
 							<th scope="col">#</th>
 							<th scope="col">Servizio</th>
-							<th scope="col">Professionista</th>
+							<th scope="col">Dipendente</th>
 							<th scope="col">Giorno</th>
 							<th scope="col">Ora</th>
 							<th scope="col"></th>
@@ -28,7 +28,7 @@
 						<tr th:each="prenotazione : ${prenotazioni}">
 							<th scope="row" th:text="${prenotazione.id}">1</th>
 							<th th:text="${prenotazione.servizio.nome}"></th>
-							<th th:text="${prenotazione.professionista.nome} + ' ' + ${prenotazione.professionista.cognome}"></th>
+							<th th:text="${prenotazione.dipendente.nome} + ' ' + ${prenotazione.dipendente.cognome}"></th>
 							<th th:text="${prenotazione.disponibilita.data}"></th>
 							<th th:text="${prenotazione.disponibilita.oraInizio} + '-' + ${prenotazione.disponibilita.oraFine}"></th>
 							<th>

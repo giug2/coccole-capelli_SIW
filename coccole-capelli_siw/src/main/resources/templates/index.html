@@ -16,8 +16,8 @@
 				<li th:each="servizio : ${servizi}" class="card">
 
 					<div th:if="${servizio.img == 'profili'}">
-						<a class="card-image" th:href="@{'/servizio/' + ${servizio.id}}" data-image-full="/images/servizi/parrucchiere.jpeg">
-							<img src="/images/servizi/parrucchiere.jpeg" alt="Servizio" />
+						<a class="card-image" th:href="@{'/servizio/' + ${servizio.id}}" data-image-full="/images/servizio/taglio-capelli.jpg">
+							<img src="/images/servizio/taglio-capelli.jpg" alt="Servizio" />
 						</a>
 					</div>
 					<!--div th:unless ="${servizio.img == 'profili'}">
@@ -26,14 +26,14 @@
 						</a>
 					</div>
 
-					<<a class="card-image" href="#" data-image-full="/images/servizio/ginnastica-posturale-500.jpeg">
-						<img src="/images/servizio/ginnastica-posturale-500.jpeg" alt="Servizio" />
+					<<a class="card-image" href="#" data-image-full="/images/servizio/taglio-capelli.jpg">
+						<img src="/images/servizio/taglio-capelli.jpg" alt="Servizio" />
 					</a>-->
 					<a class="card-description" th:href="@{'/servizio/' + ${servizio.id}}">
 						<h4 th:text="${servizio.nome}">Nome Servizio</h4>
 						<p th:text="'Descrizione: ' + ${servizio.descrizione}">Descrizione</p>
 						<p th:text="'Prezzo: ' + ${servizio.prezzo} + '€'"> Prezzo</p>
-						<p th:text="'Professionista: ' + ${servizio.professionista.nome}"> Professionista</p>
+						<p th:text="'Dipendente: ' + ${servizio.dipendente.nome}"> Dipendente</p>
 					</a>
 				</li>
 			</ul>
@@ -43,7 +43,7 @@
 	<section class="section-prenota">
 		<div class="container text-center">
 			<h2>Prenota un appuntamento</h2><br>
-			<h3>Affidati ai nostri professionisti!</h3><br>
+			<h3>Affidati ai nostri dipendenti!</h3><br>
 			<a class="btn btn-primary btn-lg" href="#">Prenota</a>
 		</div>
 		
@@ -53,30 +53,30 @@
 		<div class="container">
 			<div class="row text-center">
 				<div class="col-md-12">
-					<h2>I Nostri Professionisti</h2>
+					<h2>I Nostri Dipendenti</h2>
 				</div>
 
 				<div class="container">
 					<div class="row">
 
-						<div th:each="professionista : ${professionisti}" class="col-md-4">
+						<div th:each="dipendente : ${dipendentii}" class="col-md-4">
 							<div class="team-member">
 								<figure>
 									<!--<img src="http://www.mauritiusdsilva.com/themes/hallooou/assets/images/lauren-cox.jpg" alt="" class="img-responsive">-->
-									<div th:if="${professionista.img == 'profili'}">
-										<img src="/images/professionista/professionista.jpeg" alt="">
+									<div th:if="${dipendente.img == 'profili'}">
+										<img src="/images/dipendente/dipendente.jpeg" alt="">
 									</div>
-									<div th:unless ="${professionista.img == 'profili'}">
-										<img th:src="'/images/professionista/profili/' + ${professionista.img}" alt="Profile professionista">
+									<div th:unless ="${dipendente.img == 'profili'}">
+										<img th:src="'/images/dipendente/profili/' + ${dipendente.img}" alt="Profile dipendente">
 									</div>
 									<figcaption class="text-center">
-										<h3 th:text="${professionista.nome} + ' ' + ${professionista.cognome}"></h3>
-										<p th:text="${professionista.professione}">Professionista</p>
+										<h3 th:text="${dipendente.nome} + ' ' + ${dipendente.cognome}"></h3>
+										<p th:text="${dipendente.specializzazione}">Dipendente</p>
 										<p><a th:href="@{/profile}" class="btn btn-dark">Prenota un Appuntamento</a></p>
 									</figcaption>
 								</figure>
-								<h4 th:text="${professionista.nome} + ' ' + ${professionista.cognome}"></h4>
-								<p th:text="${professionista.professione}"></p>
+								<h4 th:text="${dipendente.nome} + ' ' + ${dipendente.cognome}"></h4>
+								<p th:text="${dipendente.specializzazione}"></p>
 							</div>
 						</div>
 

@@ -17,7 +17,7 @@
 								<th scope="col">#</th>
 								<th scope="col">Nome</th>
 								<th scope="col">Descrizione</th>
-								<th scope="col">Professionista</th>
+								<th scope="col">Dipendente</th>
 								<th scope="col">Prezzo</th>
 								<th scope="col"></th>
 							</tr>
@@ -27,7 +27,7 @@
 								<th scope="row" th:text="${servizio.id}">1</th>
 								<th th:text="${servizio.nome}">Nome</th>
 								<th th:text="${servizio.descrizione}">Descrizione</th>
-								<th th:text="${servizio.professionista.nome} + ' ' + ${servizio.professionista.cognome}"></th>
+								<th th:text="${servizio.dipendente.nome} + ' ' + ${servizio.dipendente.cognome}"></th>
 								<th th:text="${servizio.prezzo}">Prezzo</th>
 								<th>
 									<a th:href="@{'/profile/prenotazione/disponibilita/' + ${idUtente} + '/' + ${servizio.id}}" class="btn btn-success">Seleziona</a>
