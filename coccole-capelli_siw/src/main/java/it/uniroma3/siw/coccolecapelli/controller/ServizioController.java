@@ -1,7 +1,6 @@
 package it.uniroma3.siw.coccolecapelli.controller;
 
 import static it.uniroma3.siw.coccolecapelli.model.Servizio.DIR_ADMIN_PAGES_SERVIZIO;
-import static it.uniroma3.siw.coccolecapelli.model.Servizio.DIR_FOLDER_IMG;
 import static it.uniroma3.siw.coccolecapelli.model.Servizio.DIR_PAGES_SERVIZIO;
 
 import jakarta.validation.Valid;
@@ -22,7 +21,6 @@ import it.uniroma3.siw.coccolecapelli.model.Dipendente;
 import it.uniroma3.siw.coccolecapelli.model.Servizio;
 import it.uniroma3.siw.coccolecapelli.service.DipendenteService;
 import it.uniroma3.siw.coccolecapelli.service.ServizioService;
-import it.uniroma3.siw.coccolecapelli.utility.FileStore;
 
 @Controller
 public class ServizioController {
@@ -83,7 +81,6 @@ public class ServizioController {
 		servizio.setDipendente(dipendente);
 		this.servizioValidator.validate(servizio, bindingResult);
 		if(!bindingResult.hasErrors()) {
-			servizio.setImg(FileStore.store(file,DIR_FOLDER_IMG));
 			this.dipendenteService.addServizio(dipendente, servizio);
 			
 			return "redirect:/admin/servizi/" + id;
@@ -138,25 +135,8 @@ public class ServizioController {
 			
 			return "redirect:/admin/servizi/" + servizio.getDipendente().getId();
 		}
-		servizio.setImg(s.getImg());
 		return DIR_ADMIN_PAGES_SERVIZIO + "editServizio";
 	}
-	
-	@PostMapping("/admin/servizio/changeImg/{idS}")
-	public String changeImgDipendente(@PathVariable("idS") Long idS,
-			   					@RequestParam("file") MultipartFile file, 
-			   					Model model) {
-		
-		Servizio s = this.servizioService.findById(idS);
-		if(!s.getImg().equals("profili")) {
-			FileStore.removeImg(DIR_FOLDER_IMG, s.getImg());
-		}
-
-		s.setImg(FileStore.store(file, DIR_FOLDER_IMG));
-		this.servizioService.save(s);
-		return this.getEditServizio(idS, model);
-	}
-	
 	/*----*/
 	
 	

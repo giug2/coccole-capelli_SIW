@@ -25,9 +25,6 @@
 						</a>
 					</div>
 
-					<!--<a class="card-image" href="#" data-image-full="/images/servizio/ginnastica-posturale-500.jpeg">
-						<img src="/images/servizio/ginnastica-posturale-500.jpeg" alt="Servizio" />
-					</a>-->
 					<a class="card-description" th:href="@{'/servizio/' + ${servizio.id}}">
 						<h4 th:text="${servizio.nome}">Nome Servizio</h4>
 						<p th:text="'Descrizione: ' + ${servizio.descrizione}">Descrizione</p>
@@ -45,6 +42,5 @@
 	</section>
 
 	<footer th:replace="fragments/layout.html :: fondo"></footer>
-	<div th:replace="fragments/layout.html :: jsFiles"></div>
 </body>
 </html>

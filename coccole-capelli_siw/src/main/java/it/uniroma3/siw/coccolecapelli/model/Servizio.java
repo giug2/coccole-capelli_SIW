@@ -1,13 +1,12 @@
 package it.uniroma3.siw.coccolecapelli.model;
 
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
-
-import it.uniroma3.siw.coccolecapelli.utility.FileStore;
 
 @Entity
 public class Servizio {
@@ -28,8 +27,6 @@ public class Servizio {
 	
 	/*@NotBlank*/
 	private Float prezzo;
-	
-	private String img;
 	
 	@ManyToOne
 	private Dipendente dipendente;
@@ -72,18 +69,6 @@ public class Servizio {
 
 	public void setDipendente(Dipendente dipendente) {
 		this.dipendente = dipendente;
-	}
-
-	public String getImg() {
-		return img;
-	}
-
-	public void setImg(String img) {
-		this.img = img;
-	}
-	
-	public void eliminaImmagine() {
-		FileStore.removeImg(DIR_FOLDER_IMG, this.getImg());
 	}
 	
 }

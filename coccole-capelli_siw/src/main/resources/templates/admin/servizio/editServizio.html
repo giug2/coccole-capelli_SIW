@@ -30,16 +30,6 @@
 					<div><button type="submit" class="btn btn-success">Modifica</button></div>
 				</form>
 				<br><br>
-				<h3>Modifica Immagine Profilo Servizio</h3><br>
-				<div class="form_container">
-					<form th:action="@{/admin/servizio/changeImg/} + ${servizio.id}" method="post" enctype="multipart/form-data">
-						<div><input type="file" class="form-control-file" name="file" required></div>
-
-						<div class="preview-img">
-							<h5><em>Immagine attuale:</em></h5>
-							<img th:if="${servizio.img == 'profili'}" src="/images/servizio/servizio.png" alt="Profile servizio">
-							<img th:unless ="${servizio.img == 'profili'}" th:src="'/images/servizio/profili/' + ${servizio.img}" alt="Profile Servizio">
-						</div>
 
 						<div><button type="submit" class="btn btn-success">Cambia Immagine</button></div>
 					</form>
@@ -54,6 +44,5 @@
 	</section>
 
 	<footer th:replace="fragments/layout.html :: fondo"></footer>
-	<div th:replace="fragments/layout.html :: jsFiles"></div>
 </body>
 </html>

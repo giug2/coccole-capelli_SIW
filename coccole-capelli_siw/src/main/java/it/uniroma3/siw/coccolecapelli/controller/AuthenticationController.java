@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -48,28 +50,28 @@ public class AuthenticationController {
 	private PasswordEncoder passwordEncoder;
 	
 	
-	@GetMapping("/register")
-	//@RequestMapping(value="/register", method=RequestMethod.GET)
+	//@GetMapping("/register")
+	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public String showRegisterForm(Model model) {
 		model.addAttribute("utente", new User());
 		model.addAttribute("credentials", new Credentials());
 		return "autenticazione/formRegisterUser";
 	}
 	
-	@GetMapping("/login")
-	//@RequestMapping(value="/login", method=RequestMethod.GET)
+	//@GetMapping("/login")
+	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String showLoginForm(Model model) {
 		return "autenticazione/formlogin";
 	}
 	
-	@GetMapping("/logout")
-	//@RequestMapping(value="/logout", method=RequestMethod.GET)
+	//@GetMapping("/logout")
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(Model model) {
 		return "index";
 	}
 	
-	@GetMapping("/default")
-	//@RequestMapping(value="/default", method=RequestMethod.GET)
+	//@GetMapping("/default")
+	@RequestMapping(value="/default", method=RequestMethod.GET)
 	public String defaultAfterLogin(Model model) {
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
@@ -109,7 +111,8 @@ public class AuthenticationController {
 	}*/
 	
 	/* PROFILE */
-	@GetMapping("/profile")
+	//@GetMapping("/profile")
+	@RequestMapping(value="/profile", method=RequestMethod.GET)
 	public String profileUser(Model model) {
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
