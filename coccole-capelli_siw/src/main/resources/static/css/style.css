@@ -445,16 +445,16 @@ h1 span:nth-child(15) {
 	padding: 17px 32px;
 }
 
-/* SECTION PROFESSIONISTI */
+/* SECTION DIPENDENTI */
 
-.section-professionisti {
+.section-dipendenti {
 	padding: 7% 0px;
 	background: url(https://flevix.com/wp-content/uploads/2019/12/Live-Background-1.svg);
 	background-size: cover;
 	background-repeat: no-repeat;
 }
 
-.section-professionisti h2 {
+.section-dipendenti h2 {
 	font-size: 45px;
 }
 
@@ -729,15 +729,15 @@ h1 span:nth-child(15) {
 	background-position-y: center;
 }
 
-.professionista-background {
-	background: url("/images/professionista/background/professionista-background.jpg");
+.dipendente-background {
+	background: url("/images/dipendente/background/dipendente-background.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position-y: center;
 }
 
 .servizio-background {
-	background: url("/images/servizio/background/servizio-background.jpeg");
+	background: url("/images/servizio/background/servizio-background.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position-y: center;

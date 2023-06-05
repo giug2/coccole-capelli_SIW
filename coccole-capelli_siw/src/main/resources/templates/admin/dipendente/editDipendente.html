@@ -40,7 +40,7 @@
 
 						<div class="preview-img">
 							<h5><em>Immagine attuale:</em></h5>
-							<img th:if="${dipendente.img == 'profili'}" src="/images/dipendente/dipendente.png" alt="Profile dipendente">
+							<img th:if="${dipendente.img == 'profili'}" src="/images/dipendente/dipendente.jpg" alt="Profile dipendente">
 							<img th:unless ="${dipendente.img == 'profili'}" th:src="'/images/dipendente/profili/' + ${dipendente.img}" alt="Profile dipendente">
 						</div>
 
