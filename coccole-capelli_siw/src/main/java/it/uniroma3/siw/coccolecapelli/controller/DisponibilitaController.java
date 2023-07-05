@@ -42,7 +42,7 @@ public class DisponibilitaController {
 	public String getAdminDisponibilitaDipendente(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("disponibilitaList", this.disponibilitaService.findByDipendenteAndActive(this.dipendenteService.findById(id)));
 		model.addAttribute("idDipendente", id);
-		return DIR_ADMIN_PAGES_DISP + "adminElencoDisponibilita";
+		return DIR_ADMIN_PAGES_DISP + "adminElencoDisponibilita.html";
 	}
 	
 	// --- INSERIMENTO

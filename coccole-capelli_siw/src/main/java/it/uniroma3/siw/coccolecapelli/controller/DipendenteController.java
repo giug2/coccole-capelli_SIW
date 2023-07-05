@@ -44,12 +44,12 @@ public class DipendenteController {
 	}
 	
 	/* METHODS ADMIN */	
-	@GetMapping("/admin/dipendente/{id}")
-	public String getAdminDipendente(@PathVariable("id") Long id, Model model) {
-		Dipendente dipendente = dipendenteService.findById(id);
-		model.addAttribute("dipendente", dipendente);		
-		return DIR_ADMIN_PAGES_DIP + "adminDipendente";
-	}
+//	@GetMapping("/admin/dipendente/{id}")
+//	public String getAdminDipendente(@PathVariable("id") Long id, Model model) {
+//		Dipendente dipendente = dipendenteService.findById(id);
+//		model.addAttribute("dipendente", dipendente);		
+//		return DIR_ADMIN_PAGES_DIP + "adminDipendente";
+//	}
 	
 	@GetMapping("/admin/dipendenti")
 	public String getAdminDipendenti(Model model) {

@@ -68,9 +68,9 @@ public class AuthenticationController {
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
 		if(credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-			return "redirect:/admin/autenticazione/profile.html";
+			return "admin/profileAdmin.html";
 		}
-		return this.profileUser(model);
+		return "autenticazione/profile.html";
 	}
 	
 	@PostMapping(value= {"/register"})
@@ -144,6 +144,7 @@ public class AuthenticationController {
 	@PostMapping("/changeImgProfile/{idUser}")
 	public String changeImgProfile(@PathVariable("idUser") Long id,
 								   @RequestParam("file") MultipartFile file, Model model) {
+		
 		User user = utenteService.getUser(id);
 		if(!user.getImg().equals("icon-user-default.png")) {
 			FileStore.removeImg(DIR_FOLDER_IMG, user.getImg());

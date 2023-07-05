@@ -11,6 +11,8 @@ public interface ServizioRepository extends CrudRepository<Servizio, Long> {
 	
 	public boolean existsByNomeAndDipendente(String nome, Dipendente dipendente);
 	
+	public List<Servizio> findByDipendente(Dipendente dipendente);
+	
 	@Query(value = "SELECT * FROM servizio order by id limit :limit", nativeQuery = true)
 	public List<Servizio> findTopN(@Param("limit") int limit);
 }

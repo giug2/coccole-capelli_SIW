@@ -4,6 +4,8 @@ import java.util.List;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import it.uniroma3.siw.coccolecapelli.model.Dipendente;
 import it.uniroma3.siw.coccolecapelli.model.Servizio;
 import it.uniroma3.siw.coccolecapelli.repository.ServizioRepository;
 
@@ -37,6 +39,10 @@ public class ServizioService {
 
 	public Servizio findById(Long id) {
 		return this.servizioRepository.findById(id).get();
+	}
+	
+	public List<Servizio> findByDipendente(Dipendente dipendente) {
+		return this.servizioRepository.findByDipendente(dipendente);
 	}
 
 	public List<Servizio> findAll() {

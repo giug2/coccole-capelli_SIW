@@ -39,9 +39,9 @@
 									<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
 										<a class="nav-link" th:href="@{/servizi}">Servizi</a>
 									</li>
-									<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<!--li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
 										<a class="nav-link" th:href="@{/profile}">Appuntamento</a>
-									</li>
+									</li-->
 										<!--<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
 											<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dipendenti</a>
 											<div class="dropdown-menu">
@@ -52,7 +52,7 @@
 											</div>
 										</li>-->
 										<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-											<a class="nav-link" th:href="@{/professionisti}">Dipendenti</a>
+											<a class="nav-link" th:href="@{/dipendenti}">Dipendenti</a>
 										</li>
 										<li sec:authorize="!isAuthenticated()" class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
 											<a class="btn btn-sm btn-success mb-2" th:href="@{/login}">Login</a>
@@ -89,8 +89,8 @@
 							</div>
 							<br>
 							<div class="col-12">
-								<h1><span>Coc</span><span>co</span><span>le</span><span>&</span><span>Ca</span><span>pel</span><span>li</span>
-
+								<h1><!-- span>Coc</span><span>co</span><span>le</span><span>&</span><span>Ca</span><span>pel</span><span>li</span -->
+									Coccole & Capelli
 								</h1>
 								
 							</div>	
@@ -157,7 +157,7 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<strong>ATTENZIONE.</strong> <em>questa operazione è irreversibile.</em>
+							<strong>ATTENZIONE.</strong> <em>Questa operazione è irreversibile.</em>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-info" data-dismiss="modal">Annulla</button>
