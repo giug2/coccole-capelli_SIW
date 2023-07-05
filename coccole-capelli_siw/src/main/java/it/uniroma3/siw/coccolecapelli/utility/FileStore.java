@@ -19,7 +19,6 @@ public class FileStore {
         Path fileNameAndPath  = Paths.get(uploadDirectory+folderName, file.getOriginalFilename());
         try {
             Files.write(fileNameAndPath, file.getBytes());
-
         } catch (IOException e) {
             e.printStackTrace();
         }

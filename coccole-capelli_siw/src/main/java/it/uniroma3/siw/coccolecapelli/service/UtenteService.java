@@ -3,11 +3,9 @@ package it.uniroma3.siw.coccolecapelli.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import it.uniroma3.siw.coccolecapelli.model.Prenotazione;
 import it.uniroma3.siw.coccolecapelli.model.User;
 import it.uniroma3.siw.coccolecapelli.repository.UtenteRepository;

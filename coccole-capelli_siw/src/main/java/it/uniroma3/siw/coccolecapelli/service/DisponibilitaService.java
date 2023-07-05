@@ -1,12 +1,9 @@
 package it.uniroma3.siw.coccolecapelli.service;
 
 import java.util.List;
-
 import jakarta.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import it.uniroma3.siw.coccolecapelli.model.Disponibilita;
 import it.uniroma3.siw.coccolecapelli.model.Dipendente;
 import it.uniroma3.siw.coccolecapelli.repository.DisponibilitaRepository;

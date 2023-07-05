@@ -1,9 +1,7 @@
 package it.uniroma3.siw.coccolecapelli.controller;
 
 import static it.uniroma3.siw.coccolecapelli.model.User.DIR_FOLDER_IMG;
-
 import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,19 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import it.uniroma3.siw.coccolecapelli.controller.validator.UtenteValidator;
 import it.uniroma3.siw.coccolecapelli.model.User;
 import it.uniroma3.siw.coccolecapelli.service.UtenteService;
-
 import it.uniroma3.siw.coccolecapelli.controller.validator.CredentialsValidator;
 import it.uniroma3.siw.coccolecapelli.model.Credentials;
 import it.uniroma3.siw.coccolecapelli.service.CredentialsService;
-
 import it.uniroma3.siw.coccolecapelli.utility.FileStore;
 
 @Controller
@@ -49,36 +42,34 @@ public class AuthenticationController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	
-	//@GetMapping("/register")
-	@RequestMapping(value="/register", method=RequestMethod.GET)
+	@GetMapping("/register")
+	//@RequestMapping(value="/register", method=RequestMethod.GET)
 	public String showRegisterForm(Model model) {
 		model.addAttribute("utente", new User());
 		model.addAttribute("credentials", new Credentials());
 		return "autenticazione/formRegisterUser";
 	}
 	
-	//@GetMapping("/login")
-	@RequestMapping(value="/login", method=RequestMethod.GET)
+	@GetMapping("/login")
+	//@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String showLoginForm(Model model) {
 		return "autenticazione/formlogin";
 	}
 	
-	//@GetMapping("/logout")
-	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	@GetMapping("/logout")
+	//@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(Model model) {
 		return "index";
 	}
 	
-	//@GetMapping("/default")
-	@RequestMapping(value="/default", method=RequestMethod.GET)
+	@GetMapping("/default")
+	//@RequestMapping(value="/default", method=RequestMethod.GET)
 	public String defaultAfterLogin(Model model) {
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
 		if(credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
 			return "redirect:/admin/autenticazione/profile.html";
 		}
-		
 		return this.profileUser(model);
 	}
 	
@@ -92,14 +83,12 @@ public class AuthenticationController {
         // validazione user e credenziali
         this.utenteValidator.validate(user, utenteBindingResult);
         this.credentialsValidator.validate(credentials, credentialsBindingResult);
-
 		if(!utenteBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
 			user.setImg("icon-default-user.png");
 			credentials.setUtente(user);
 			credentialsService.saveCredentials(credentials);
 			return "autenticazione/registrationSuccessful";
 		}
-		
 		return "autenticazione/formRegisterUser";
 	}
 	
@@ -111,8 +100,8 @@ public class AuthenticationController {
 	}*/
 	
 	/* PROFILE */
-	//@GetMapping("/profile")
-	@RequestMapping(value="/profile", method=RequestMethod.GET)
+	@GetMapping("/profile")
+	//@RequestMapping(value="/profile", method=RequestMethod.GET)
 	public String profileUser(Model model) {
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
@@ -131,16 +120,13 @@ public class AuthenticationController {
 		
 		credentials.setUsername("defaultUsernameForVa");
 		credentialsValidator.validate(credentials, credentialsBindingResult);
-		
 		if(!credentials.getPassword().equals(pass)) {
 			credentialsBindingResult.addError(new ObjectError("notMatchConfirmPassword", "Le password non coincidono"));
 		}
-		
 		Credentials c = credentialsService.getCredentials(id);
 		User user = utenteService.getUser(c.getUtente().getId());
 		credentials.setUsername(c.getUsername());
 		credentials.setId(id);
-		
 		if(!credentialsBindingResult.hasErrors()) {
 			c.setPassword(this.passwordEncoder.encode(credentials.getPassword()));
 			credentialsService.save(c);

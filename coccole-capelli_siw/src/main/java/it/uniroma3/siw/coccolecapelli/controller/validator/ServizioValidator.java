@@ -24,5 +24,4 @@ public class ServizioValidator implements Validator {
 		if(this.servizioService.alreadyExists((Servizio) target))
 			errors.reject("duplicate.servizio");
 	}
-	
 }

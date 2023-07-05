@@ -1,7 +1,6 @@
 package it.uniroma3.siw.coccolecapelli.model;
 
 import jakarta.persistence.Entity;
-
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,7 +24,7 @@ public class Servizio {
 	@NotBlank
 	private String descrizione;
 	
-	/*@NotBlank*/
+	@NotBlank
 	private Float prezzo;
 	
 	@ManyToOne
@@ -70,5 +69,4 @@ public class Servizio {
 	public void setDipendente(Dipendente dipendente) {
 		this.dipendente = dipendente;
 	}
-	
 }

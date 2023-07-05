@@ -1,7 +1,6 @@
 package it.uniroma3.siw.coccolecapelli.model;
 
 import java.util.List;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,7 +42,6 @@ public class Dipendente {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "dipendente")
 	private List<Prenotazione> prenotazioni; 
-
 
 	public Long getId() {
 		return id;
@@ -96,7 +94,6 @@ public class Dipendente {
 	public List<Prenotazione> getPrenotazione() {
 		return prenotazioni;
 	}
-
 
 	public void setPrenotazione(List<Prenotazione> prenotazioni) {
 		this.prenotazioni = prenotazioni;

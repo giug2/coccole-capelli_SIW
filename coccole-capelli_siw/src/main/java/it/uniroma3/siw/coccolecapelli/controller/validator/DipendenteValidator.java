@@ -24,5 +24,4 @@ public class DipendenteValidator implements Validator {
 		if(dipendenteService.alreadyExists((Dipendente) target))
 			errors.reject("duplicate.dipendente");
 	}
-
 }

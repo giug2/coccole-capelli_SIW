@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import it.uniroma3.siw.coccolecapelli.service.ServizioService;
-
 import it.uniroma3.siw.coccolecapelli.service.DipendenteService;
+
 @Controller
 public class GeneralController {
 
@@ -19,10 +18,8 @@ public class GeneralController {
 
 	@GetMapping("/")
 	public String getServiziAndDipendente(Model model) {
-		
 		model.addAttribute("dipendente", this.dipendenteService.findLastDipendente());
 		model.addAttribute("servizi", this.servizioService.findLastServizi());
-		
 		return "index";
 	}
 	
@@ -30,5 +27,4 @@ public class GeneralController {
 	public String get() {
 		return "redirect:/admin/dipendente";
 	}
-	
 }

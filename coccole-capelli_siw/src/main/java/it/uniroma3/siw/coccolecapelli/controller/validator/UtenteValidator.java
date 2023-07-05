@@ -34,5 +34,4 @@ public class UtenteValidator implements Validator {
     public boolean supports(Class<?> clazz) {
         return User.class.equals(clazz);
     }
-
 }

@@ -1,12 +1,9 @@
 package it.uniroma3.siw.coccolecapelli.service;
 
 import java.util.List;
-
 import jakarta.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import it.uniroma3.siw.coccolecapelli.model.Servizio;
 import it.uniroma3.siw.coccolecapelli.model.Disponibilita;
 import it.uniroma3.siw.coccolecapelli.model.Dipendente;
@@ -35,12 +32,10 @@ public class DipendenteService {
 		return (List<Dipendente>) dipendenteRepository.findAll();
 	}
 	
-	
 	@Transactional
 	public void delete(Dipendente dipendente) {
 		this.dipendenteRepository.delete(dipendente);
 	}
-	
 	
 	@Transactional
 	public void update(Dipendente dipendente, Long id) {
@@ -51,7 +46,6 @@ public class DipendenteService {
 		p.setPartitaIVA(dipendente.getPartitaIVA());
 		this.dipendenteRepository.save(p);
 	}
-	
 	
 	@Transactional
 	public void addServizio(Dipendente dipendente, Servizio servizio) {
@@ -65,9 +59,7 @@ public class DipendenteService {
 		this.dipendenteRepository.save(dipendente);
 	}
 
-
 	public List<Dipendente> findLastDipendente() {
 		return this.dipendenteRepository.findTopN(6);
 	}
-
 }

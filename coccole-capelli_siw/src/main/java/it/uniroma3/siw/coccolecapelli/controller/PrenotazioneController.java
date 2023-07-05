@@ -1,9 +1,7 @@
 package it.uniroma3.siw.coccolecapelli.controller;
 
 import static it.uniroma3.siw.coccolecapelli.model.Prenotazione.DIR_PAGES_PREN;
-
 import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-
 import it.uniroma3.siw.coccolecapelli.controller.validator.PrenotazioneValidator;
 import it.uniroma3.siw.coccolecapelli.model.Disponibilita;
 import it.uniroma3.siw.coccolecapelli.model.Prenotazione;
@@ -45,7 +42,6 @@ public class PrenotazioneController {
 	public String getPrenotazioni(@PathVariable("id") Long id, Model model) {
 		User utente = this.utenteService.getUser(id);
 		model.addAttribute("prenotazioni", utente.getPrenotazioni());
-		
 		return DIR_PAGES_PREN + "elencoPrenotazioni";
 	}
 	
@@ -60,14 +56,12 @@ public class PrenotazioneController {
 	public String selectDisponibilita(@PathVariable("idU") Long idUtente, 
 									  @PathVariable("idS") Long idServizio, 
 									  Model model) {
+		
 		model.addAttribute("idUtente", idUtente);
 		model.addAttribute("idServizio", idServizio);
 		model.addAttribute("prenotazione", new Prenotazione());
-		
 		Dipendente p = this.servizioService.findById(idServizio).getDipendente();
-		
 		model.addAttribute("disponibilitaList", this.disponibilitaService.findByDipendenteAndActive(p));
-		
 		return DIR_PAGES_PREN + "elencoDisponibilitaPrenotazione";
 	}
 	
@@ -88,13 +82,11 @@ public class PrenotazioneController {
 		p.setDisponibilita(d);
 		p.setServizio(s); 
 		d.setActive(false);
-		
 		this.prenotazioneValidator.validate(p, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			this.utenteService.addPrenotazione(u, p);			
 			return "redirect:/profile/prenotazioni/" + u.getId();
 		}
-		
 		//da modellare in caso di errori
 		return DIR_PAGES_PREN + "riepilogoPrenotazione";
 	}
@@ -106,10 +98,8 @@ public class PrenotazioneController {
 		Disponibilita d = p.getDisponibilita();
 		//Parrucchiere parr = p.getParrucchiere();
 		d.setActive(true);
-		
 		this.utenteService.deletePrenotazione(u, p);
 		this.prenotazioneService.delete(p);
-		
 		return "redirect:/profile/prenotazioni/" + u.getId();
 	}
 }

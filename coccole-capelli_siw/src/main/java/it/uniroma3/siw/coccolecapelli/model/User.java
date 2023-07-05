@@ -2,7 +2,6 @@ package it.uniroma3.siw.coccolecapelli.model;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +28,6 @@ public class User{
 	@NotBlank
 	private String cognome;
 	
-	@NotBlank
 	private LocalDate dataDiNascita;
 	
 	private String img;
