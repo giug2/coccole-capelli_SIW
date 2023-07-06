@@ -14,9 +14,15 @@
 	<section class="generic_section">
 		<div class="container">
 			<div class="mb-4">
-				<h2>Profilo Utente</h2>
+				<h2><center>Profilo Utente</center></h2>
 			</div>
+				<h3><center>Vuoi far parte del nostro team?</center></h3>
 
+			<div class="ml-1 mb-2 row">
+				<a th:if="${credentials.role == 'ADMIN'}" th:href="@{'/admin/dipendente/add'}" class="btn btn-md btn-success mb-2 mr-3">Aggiungiti</a>
+				<a th:if="${credentials.role == 'GENERIC_USER'}" th:href="@{'/admin/servizi/' + ${user.id}}" class="btn btn-md btn-success mb-2 mr-3">Aggiungiti</a>
+			</div>	
+			
 			<div class="ml-1 mb-2 row">
 				<a th:if="${credentials.role == 'ADMIN'}" th:href="@{'/admin/servizi/' + ${user.id}}" class="btn btn-md btn-success mb-2 mr-3">Servizi</a>
 				<a th:if="${credentials.role == 'ADMIN'}" th:href="@{'/admin/disponibilita/' + ${user.id}}" class="btn btn-md btn-success mb-2 mr-3">Disponibilita</a>
