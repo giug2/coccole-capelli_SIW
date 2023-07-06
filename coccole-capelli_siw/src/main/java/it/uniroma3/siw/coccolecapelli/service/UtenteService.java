@@ -34,6 +34,17 @@ public class UtenteService {
         return result;
     }
     
+    public List<User> getAllUsersDipendenti() {
+        List<User> result = new ArrayList<>();
+        Iterable<User> iterable = this.utenteRepository.findAll();
+        String s1 = new String("ADMIN");
+        for(User user : iterable) {
+        	if (user.getCredentials().getRole().equals(s1))
+        		 result.add(user);
+        }
+        return result;
+    }
+    
 	public boolean alreadyExists(User u) {
 		return utenteRepository.existsByNomeAndCognome(u.getNome(), u.getCognome());
 	}

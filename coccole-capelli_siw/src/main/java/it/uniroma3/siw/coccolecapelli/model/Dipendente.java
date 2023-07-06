@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -33,6 +34,9 @@ public class Dipendente {
 	
 	@NotBlank
 	private String partitaIVA;
+	
+	@OneToOne
+	private User utente;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "dipendente")
 	private List<Servizio> servizi;
@@ -121,5 +125,13 @@ public class Dipendente {
 
 	public void setPartitaIVA(String partitaIVA) {
 		this.partitaIVA = partitaIVA;
+	}
+
+	public User getUtente() {
+		return utente;
+	}
+
+	public void setUtente(User utente) {
+		this.utente = utente;
 	}
 }
