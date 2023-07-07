@@ -1,5 +1,6 @@
 package it.uniroma3.siw.coccolecapelli.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import it.uniroma3.siw.coccolecapelli.model.Prenotazione;
 import it.uniroma3.siw.coccolecapelli.model.User;
+import it.uniroma3.siw.coccolecapelli.oauth.AuthenticationProvider;
 import it.uniroma3.siw.coccolecapelli.repository.UtenteRepository;
 
 @Service
@@ -23,6 +25,12 @@ public class UtenteService {
     
     public User getUser(Long id) {
         Optional<User> result = this.utenteRepository.findById(id);
+        return result.orElse(null);
+    }
+    
+    @Transactional
+    public User getUsername(String logina) {
+        Optional<User> result = this.utenteRepository.findByUsername(logina);
         return result.orElse(null);
     }
 	
@@ -60,4 +68,24 @@ public class UtenteService {
 		u.getPrenotazioni().remove(prenotazione);
 		this.utenteRepository.save(u);
 	}
+	
+	public void registerNewCustomerAfterOAuthLoginSuccess(String loginName, String fullName, AuthenticationProvider provider) {
+        User user = new User();
+        if(loginName != null) {
+            user.setUsername(loginName);
+            user.setNome(fullName);
+        }
+        else{
+            user.setUsername(loginName);
+        }
+        user.setCreationTimestamp(LocalDateTime.now());
+        user.setoAuthProvider(provider);
+        utenteRepository.save(user);
+    }
+	
+	public void updateExistingUser(User user,String fullName, AuthenticationProvider provider){
+        user.setNome(fullName);
+        user.setoAuthProvider(provider);
+        utenteRepository.save(user);
+    }
 }

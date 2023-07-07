@@ -16,12 +16,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import it.uniroma3.siw.coccolecapelli.oauth.OAuth2LoginSuccessHandler;
+import it.uniroma3.siw.coccolecapelli.service.CustomOAuth2UserService;
+
 @Configuration
 @EnableWebSecurity
 public class AuthConfiguration {
 
 	@Autowired 
 	private DataSource dataSource;
+	
+	@Autowired
+    CustomOAuth2UserService customOAuth2UserService;
+
+    @Autowired
+    private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 
 	@Autowired
 	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
@@ -46,9 +55,9 @@ public class AuthConfiguration {
 		httpSecurity
 		.csrf().and().cors().disable()
 		.authorizeHttpRequests()
-		//        .requestMatchers("/**").permitAll()
+//		.requestMatchers("/**").permitAll()
 		// chiunque (autenticato o no) può accedere alle pagine index, login, register, ai css e alle immagini
-		.requestMatchers(HttpMethod.GET,"/","/index","/register","/css/**", "/images/**", "favicon.ico").permitAll()
+		.requestMatchers(HttpMethod.GET,"/","/index","/register","/css/**", "/images/**", "favicon.ico", "information/**").permitAll()
 		// chiunque (autenticato o no) può mandare richieste POST al punto di accesso per login e register 
 		.requestMatchers(HttpMethod.POST,"/register", "/login").permitAll()
 		.requestMatchers(HttpMethod.GET,"/admin/**").hasAnyAuthority(ADMIN_ROLE)
@@ -64,6 +73,16 @@ public class AuthConfiguration {
 		// LOGOUT: qui definiamo il logout
 		.and()
 		.logout()
+		.invalidateHttpSession(true)
+        .clearAuthentication(true).permitAll()
+        .and()
+        .oauth2Login()
+        .loginPage("/login")
+        .userInfoEndpoint()
+        .userService(customOAuth2UserService)
+        .and()
+        .successHandler(oAuth2LoginSuccessHandler)
+        .and().logout()
 		// il logout è attivato con una richiesta GET a "/logout"
 		.logoutUrl("/logout")
 		// in caso di successo, si viene reindirizzati alla home

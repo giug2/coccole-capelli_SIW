@@ -5,6 +5,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +16,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import it.uniroma3.siw.coccolecapelli.controller.validator.UtenteValidator;
 import it.uniroma3.siw.coccolecapelli.model.User;
 import it.uniroma3.siw.coccolecapelli.service.UtenteService;
+import it.uniroma3.siw.coccolecapelli.session.SessionData;
 import it.uniroma3.siw.coccolecapelli.controller.validator.CredentialsValidator;
 import it.uniroma3.siw.coccolecapelli.model.Credentials;
 import it.uniroma3.siw.coccolecapelli.service.CredentialsService;
@@ -42,6 +47,9 @@ public class AuthenticationController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	@Autowired
+	SessionData sessionData;
+	
 	@GetMapping("/register")
 	//@RequestMapping(value="/register", method=RequestMethod.GET)
 	public String showRegisterForm(Model model) {
@@ -62,13 +70,30 @@ public class AuthenticationController {
 		return "index";
 	}
 	
+	@GetMapping(value = "/") 
+	public String index(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication instanceof AnonymousAuthenticationToken) {
+	        return "index.html";
+		}
+		else {		
+			UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+			if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
+				return "redirect:/admin/dipendente";
+			}
+		}
+        return "index.html";
+	}
+	
 	@GetMapping("/default")
 	//@RequestMapping(value="/default", method=RequestMethod.GET)
 	public String defaultAfterLogin(Model model) {
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
 		if(credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-			return "redirect:/admin/dipendente";
+//			return "redirect:/admin/dipendente";
+			return "index.html";
 		}
 		return this.profileUser(model);
 	}
@@ -98,6 +123,13 @@ public class AuthenticationController {
 		OAuth2User userDetails = (OAuth2User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return "index.html";
 	}*/
+	
+	@RequestMapping(value={"login/oauth2/user"}, method = RequestMethod.GET)
+	public String oAuth2Successful(Model model){
+		User loggedUser = this.sessionData.getLoggedUser();
+		model.addAttribute("user",loggedUser);
+		return "index.html";
+	}
 	
 	/* PROFILE */
 	@GetMapping("/profile")

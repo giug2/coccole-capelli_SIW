@@ -1,15 +1,12 @@
 package it.uniroma3.siw.coccolecapelli.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import it.uniroma3.siw.coccolecapelli.oauth.AuthenticationProvider;
+import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -25,6 +22,8 @@ public class User{
 	@NotBlank
 	private String nome;
 	
+	private String username;
+	
 	@NotBlank
 	private String cognome;
 	
@@ -34,6 +33,16 @@ public class User{
 	
 	@OneToOne (mappedBy="utente")
 	private Credentials credentials;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "auth_provider")
+	private AuthenticationProvider oAuthProvider;
+	
+	@CreationTimestamp
+	private LocalDateTime creationTimestamp;
+
+	@UpdateTimestamp
+	private LocalDateTime lastUpdateTimestamp;
 	
 	@OneToMany (cascade = CascadeType.ALL)
 	private List<Prenotazione> prenotazioni;
@@ -92,5 +101,37 @@ public class User{
 
 	public void setPrenotazioni(List<Prenotazione> prenotazioni) {
 		this.prenotazioni = prenotazioni;
+	}
+
+	public AuthenticationProvider getoAuthProvider() {
+		return oAuthProvider;
+	}
+
+	public void setoAuthProvider(AuthenticationProvider oAuthProvider) {
+		this.oAuthProvider = oAuthProvider;
+	}
+
+	public LocalDateTime getCreationTimestamp() {
+		return creationTimestamp;
+	}
+
+	public void setCreationTimestamp(LocalDateTime creationTimestamp) {
+		this.creationTimestamp = creationTimestamp;
+	}
+
+	public LocalDateTime getLastUpdateTimestamp() {
+		return lastUpdateTimestamp;
+	}
+
+	public void setLastUpdateTimestamp(LocalDateTime lastUpdateTimestamp) {
+		this.lastUpdateTimestamp = lastUpdateTimestamp;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }

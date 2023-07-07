@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: headerfiles(title='Register')"> </head>
+<head th:replace="fragments/layout.html :: headerfiles(title='Register')"> 
+</head>
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 	
@@ -36,6 +37,13 @@
 				</div>
 					
 					<div><button type="submit" class="btn btn-success">Conferma</button></div>
+					
+					<div class="social-container">
+					<a href="/oauth2/authorization/facebook" class="social" id="facebook"><i class="fa fa-facebook"></i></a>
+					<a href="/oauth2/authorization/google" class="social" id="google"><i class="fa fa-google"></i></a>
+					<a href="/oauth2/authorization/github" class="social" id="github" ><i class="fa fa-github"></i></a>
+				</div>
+				
 				</form>
 	          </div>
 	        </div>
@@ -43,7 +51,7 @@
 	          <img class="mb-4" style="width: 100%" src="/images/authentication/image-register.jpg">
 	        </div>
 	      </div>
-
+	      
 	      <br>
 	      
 	      <div th:replace="fragments/layout.html :: backButton(back='/', text1='Indietro', back2='no', text2=' ')"></div>

@@ -16,12 +16,12 @@ public class GeneralController {
 	@Autowired
 	private DipendenteService dipendenteService;
 
-	@GetMapping("/")
-	public String getServiziAndDipendente(Model model) {
-		model.addAttribute("dipendente", this.dipendenteService.findLastDipendente());
-		model.addAttribute("servizi", this.servizioService.findLastServizi());
-		return "index";
-	}
+//	@GetMapping("/")
+//	public String getServiziAndDipendente(Model model) {
+//		model.addAttribute("dipendente", this.dipendenteService.findLastDipendente());
+//		model.addAttribute("servizi", this.servizioService.findLastServizi());
+//		return "index";
+//	}
 	
 	@GetMapping("/admin")
 	public String get() {
