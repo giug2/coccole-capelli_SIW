@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Servizio {
@@ -21,10 +22,9 @@ public class Servizio {
 	@NotBlank
 	private String nome;
 	
-	@NotBlank
 	private String descrizione;
 	
-	@NotBlank
+	@NotNull
 	private Float prezzo;
 	
 	@ManyToOne

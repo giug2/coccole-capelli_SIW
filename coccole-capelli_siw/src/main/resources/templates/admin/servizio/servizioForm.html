@@ -22,7 +22,8 @@
 					<div class="form-group"><input type="text" class="form-control" placeholder="Descrizione" th:field="*{descrizione}"></div>
 					<div th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}" class="alert alert-danger" role="alert"></div>
 
-					<div class="form-group"><input type="number" step="0.1" class="form-control" placeholder="Prezzo" th:field="*{prezzo}">
+					<div class="form-group"><input type="number" step="0.5" class="form-control" placeholder="Prezzo" th:field="*{prezzo}">
+					<!--span class="validity"></span-->
 					</div>
 					<div th:if="${#fields.hasErrors('prezzo')}" th:errors="*{prezzo}" class="alert alert-danger" role="alert">
 					</div>

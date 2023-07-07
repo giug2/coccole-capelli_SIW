@@ -21,7 +21,13 @@ public class ServizioValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		if(this.servizioService.alreadyExists((Servizio) target))
+		Servizio servizio = (Servizio) target;
+		float prezzo = servizio.getPrezzo();
+		
+		if (prezzo <= 0)
+			errors.rejectValue("servizio", "prezzo");
+		
+		if(this.servizioService.alreadyExists(servizio))
 			errors.reject("duplicate.servizio");
 	}
 }
