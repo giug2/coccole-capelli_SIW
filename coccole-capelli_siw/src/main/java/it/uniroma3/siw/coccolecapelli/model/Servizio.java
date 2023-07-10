@@ -25,7 +25,7 @@ public class Servizio {
 	private String descrizione;
 	
 	@NotNull
-	private Float prezzo;
+	private String prezzo;
 	
 	@ManyToOne
 	private Dipendente dipendente;
@@ -54,11 +54,11 @@ public class Servizio {
 		this.descrizione = descrizione;
 	}
 
-	public Float getPrezzo() {
+	public String getPrezzo() {
 		return prezzo;
 	}
 
-	public void setPrezzo(Float prezzo) {
+	public void setPrezzo(String prezzo) {
 		this.prezzo = prezzo;
 	}
 
