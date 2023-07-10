@@ -1,12 +1,12 @@
 package it.uniroma3.siw.coccolecapelli.model;
 
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Servizio {
@@ -24,8 +24,10 @@ public class Servizio {
 	
 	private String descrizione;
 	
-	@NotNull
-	private String prezzo;
+	/*@NotBlank*/
+	private Float prezzo;
+	
+	private String img;
 	
 	@ManyToOne
 	private Dipendente dipendente;
@@ -54,11 +56,11 @@ public class Servizio {
 		this.descrizione = descrizione;
 	}
 
-	public String getPrezzo() {
+	public Float getPrezzo() {
 		return prezzo;
 	}
 
-	public void setPrezzo(String prezzo) {
+	public void setPrezzo(Float prezzo) {
 		this.prezzo = prezzo;
 	}
 
@@ -68,5 +70,13 @@ public class Servizio {
 
 	public void setDipendente(Dipendente dipendente) {
 		this.dipendente = dipendente;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 }

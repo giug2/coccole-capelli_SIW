@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/layout.html :: headerfiles(title='Coccole&Capelli')"></head>
-
+<head th:replace="fragments/layout.html :: headerfiles(title='Coccole e Capelli')"></head>
 <body>	
 
 	<section class="hero-anime section-hero">
 		<header th:replace="fragments/layout.html :: navMenu"></header>
 		<div th:replace="fragments/layout.html :: image-hero"></div>
 	</section>
-
 
 	<section class="section-servizi">
 		<div class="container">
@@ -21,15 +19,12 @@
 							<img src="/images/servizio/taglio-capelli.jpg" alt="Servizio" />
 						</a>
 					</div>
-					<!--div th:unless ="${servizio.img == 'profili'}">
+					<div th:unless ="${servizio.img == 'profili'}">
 						<a class="card-image" th:href="@{'/servizio/' + ${servizio.id}}" th:data-image-full="'/images/servizio/profili/' + ${servizio.img}">
 							<img th:src="'/images/servizio/profili/' + ${servizio.img}" alt="Servizio" />
 						</a>
 					</div>
 
-					<<a class="card-image" href="#" data-image-full="/images/servizio/taglio-capelli.jpg">
-						<img src="/images/servizio/taglio-capelli.jpg" alt="Servizio" />
-					</a>-->
 					<a class="card-description" th:href="@{'/servizio/' + ${servizio.id}}">
 						<h4 th:text="${servizio.nome}">Nome Servizio</h4>
 						<p th:text="'Descrizione: ' + ${servizio.descrizione}">Descrizione</p>
@@ -37,31 +32,32 @@
 						<p th:text="'Dipendente: ' + ${servizio.dipendente.nome}"> Dipendente</p>
 					</a>
 				</li>
+
 			</ul>
 		</div>
 	</section>
 
-
 	<section class="section-prenota">
 		<div class="container text-center">
 			<h2>Prenota un appuntamento</h2><br>
-			<h3>Affidati ai nostri dipendenti!</h3><br>
+			<h3>Affidati alle nostre dipendenti!</h3><br>
 			<a class="btn btn-primary btn-lg" href="#">Prenota</a>
 		</div>
+		
 	</section>
 
-
-	<section id="team" class="team section-professionisti ">
+	<section id="team" class="team section-dipendenti">
 		<div class="container">
 			<div class="row text-center">
 				<div class="col-md-12">
 					<h2>I Nostri Dipendenti</h2>
+					<h3 class="caption gray">sempre alla moda</h3>
 				</div>
 
 				<div class="container">
 					<div class="row">
 
-						<div th:each="dipendente : ${dipendentii}" class="col-md-4">
+						<div th:each="dipendente : ${dipendenti}" class="col-md-4">
 							<div class="team-member">
 								<figure>
 									<!--<img src="http://www.mauritiusdsilva.com/themes/hallooou/assets/images/lauren-cox.jpg" alt="" class="img-responsive">-->
@@ -72,8 +68,8 @@
 										<img th:src="'/images/dipendente/profili/' + ${dipendente.img}" alt="Profile dipendente">
 									</div>
 									<figcaption class="text-center">
-										<h3 th:text="${dipendente.nome} + ' ' + ${dipendente.cognome}"></h3>
-										<p th:text="${dipendente.specializzazione}">Dipendente</p>
+										<h3 th:text="${professionista.nome} + ' ' + ${professionista.cognome}"></h3>
+										<p th:text="${professionista.professione}">Professionista</p>
 										<p><a th:href="@{/profile}" class="btn btn-dark">Prenota un Appuntamento</a></p>
 									</figcaption>
 								</figure>

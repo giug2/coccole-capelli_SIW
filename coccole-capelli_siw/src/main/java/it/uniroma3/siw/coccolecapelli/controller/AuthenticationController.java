@@ -70,23 +70,23 @@ public class AuthenticationController {
 		return "index";
 	}
 	
-	@GetMapping(value = "/") 
-	public String index(Model model) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication instanceof AnonymousAuthenticationToken) {
-	        return "index.html";
-		}
-		else {		
-			UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
-			if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-				return "redirect:/admin/dipendente";
-			}
-		}
-        return "index.html";
-	}
+//	@GetMapping(value = "/") 
+//	public String index(Model model) {
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		if (authentication instanceof AnonymousAuthenticationToken) {
+//	        return "index.html";
+//		}
+//		else {		
+//			UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//			Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+//			if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
+//				return "redirect:/admin/dipendente";
+//			}
+//		}
+//        return "index.html";
+//	}
 	
-	@GetMapping("/default")
+	@GetMapping("/success")
 	//@RequestMapping(value="/default", method=RequestMethod.GET)
 	public String defaultAfterLogin(Model model) {
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
