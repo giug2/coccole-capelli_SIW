@@ -15,7 +15,7 @@ public class Disponibilita {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Long ida;
 	
 	@NotBlank
 	private String data;
