@@ -4,12 +4,12 @@
 <body>
 	<header th:replace="fragments/layout.html :: navMenu"></header>
 	
-	
 	<section class="generic_section">
 		<div class="container">
 			<div class="mb-4">
 				<h2>Login</h2>
 			</div>
+				
 
 			<div class="row">
 				<div class="col-md-6">
@@ -31,20 +31,16 @@
 							</div>
 
 							<div><button type="submit" class="btn btn-success">Conferma</button></div>
-							<br>
-							<div class="social-container">
-					<a href="/oauth2/authorization/facebook" class="social" id="facebook"><i class="fa fa-facebook"></i></a>
-					<a href="/oauth2/authorization/google" class="social" id="google"><i class="fa fa-google"></i></a>
-					<a href="/oauth2/authorization/github" class="social"id="github" ><i class="fa fa-github"></i></a>
-				</div>
+						
+						<br><br>
+						<div class="social-container">
+							<a href="/oauth2/authorization/facebook" class="social" id="facebook"><i class="fa fa-facebook"></i></a>
+							<a href="/oauth2/authorization/google" class="social" id="google"><i class="fa fa-google"></i></a>
+							<a href="/oauth2/authorization/github" class="social"id="github" ><i class="fa fa-github"></i></a>
+						</div>
+						
 						</form>
-					</div>
-					<br><br>
-					<!--a class="btn btn-outline-success" style="margin: 10px 5px" href="/oauth2/authorization/google">
-						<img style="width: 25px; margin-right: 10px" src="/images/icon/icon-google.png">
-						Login With Google
-					</a-->
-				</div>
+					
 				<div class="col-md-6">
 					<img class="img-login" src="/images/authentication/image-login.jpg">
 				</div>
@@ -54,7 +50,6 @@
 			<div th:replace="fragments/layout.html :: backButton(back='/', text1='Indietro', back2='no', text2=' ')"></div>
 		</div> <!-- end container -->
 	</section>
-
 
 	<footer th:replace="fragments/layout.html :: fondo"></footer>
 	<div th:replace="fragments/layout.html :: jsFiles"></div>

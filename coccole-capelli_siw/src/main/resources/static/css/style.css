@@ -954,6 +954,7 @@ h1 span:nth-child(15) {
     padding-bottom: 2%;
 
 }
+
 .social-container a{
     height: 40px;
     width: 40px;
@@ -963,37 +964,32 @@ h1 span:nth-child(15) {
     align-items: center;
     border: 1px solid black;
     border-radius : 50px;
-
-
 }
 
 .social{
     font-size : 24px;
 
 }
+
 .social:hover{
     transform: scale(1.10);
     box-shadow: 0 1px 7px 0 #aa7c66;
 }
+
 #facebook{
     background: #3968b8;
-
     color: #fff;
-
     text-decoration: none;
 }
+
 #google{
     background: #e14435;
-
     color: #fff;
-
     text-decoration: none;
 }
+
 #github{
     background: #000000;
-
     color: #fff;
-
     text-decoration: none;
 }
-

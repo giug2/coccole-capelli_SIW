@@ -34,26 +34,22 @@
 							<th th:text="${dipendente.specializzazione}">Specializzazione</th>
 							<th th:text="${dipendente.partitaIVA}">partitaIVA</th>
 							<th>
-								<!--div th:replace="fragments/layout.html :: modalOperations(oggetto='servizi', 
+								<div th:replace="fragments/layout.html :: modalOperations(oggetto='servizi', 
 								link1='/admin/servizio/add/' + ${dipendente.id},
 								link2='/admin/servizi/' + ${dipendente.id},
-								id=${dipendente.id})"> </div-->
-								<a class="btn btn-success" th:href="@{'/admin/servizi/' + ${dipendente.id}}">Servizi</a>
-								
+								id=${dipendente.id})"> </div>
 							</th>
 							<th>
-								<!--div th:replace="fragments/layout.html :: modalOperations(oggetto='Disponibilità', 
+								<div th:replace="fragments/layout.html :: modalOperations(oggetto='Disponibilità', 
 								link1='/admin/disponibilita/add/' + ${dipendente.id},
 								link2='/admin/disponibilita/' + ${dipendente.id},
-								id=${dipendente.id})"> </div-->
-								<a class="btn btn-success" th:href="@{'/admin/disponibilita/' + ${dipendente.id}}">Disponibilità</a>
+								id=${dipendente.id})"> </div>
 							</th>
 							<th>
 								<a class="btn btn-success" th:href="@{'/admin/dipendente/edit/' + ${dipendente.id}}">Modifica</a>
 							</th>
 							<th>
-								<!--div th:replace="fragments/layout.html :: modalDelete(nome=${dipendente.nome}, link='/admin/dipendente/delete/' + ${dipendente.id}, id=${dipendente.id})"> </div-->
-								<a class="btn btn-success" th:href="@{'/admin/dipendente/delete/' + ${dipendente.id}}">Elimina</a>
+								<div th:replace="fragments/layout.html :: modalDelete(nome=${dipendente.nome}, link='/admin/dipendente/delete/' + ${dipendente.id}, id=${dipendente.id})"> </div>
 							</th>
 						</tr>
 					</tbody>

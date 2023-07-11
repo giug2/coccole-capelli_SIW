@@ -14,16 +14,12 @@
 	<section class="generic_section">
 		<div class="container">
 			<div class="mb-4">
-				<h2><center>Profilo Utente</center></h2>
+				<h2>Profilo Utente</h2>
 			</div>
-				<!--h3><center>Vuoi far parte del nostro team?</center></h3-->
 
 			<div class="ml-1 mb-2 row">
-				<a th:if="${credentials.role == 'ADMIN'}" th:href="@{'/admin/dipendenti'}" class="btn btn-md btn-success mb-2 mr-3">Gestisci Dipendenti</a>
-			</div>	
-			
-			<div class="ml-1 mb-2 row">
-				<a th:if="${credentials.role == 'GENERIC_USER'}" th:href="@{'/profile/prenotazioni/' + ${user.id}}" class="btn btn-md btn-success mb-2">I miei Appuntamenti</a>
+				<a th:if="${credentials.role == 'ADMIN'}" th:href="@{/admin}" class="btn btn-md btn-success mb-2 mr-3">Amministrazione</a>
+				<a th:href="@{'/profile/prenotazioni/' + ${user.id}}" class="btn btn-md btn-success mb-2">I miei Appuntamenti</a>
 			</div>
 			<div th:if="${okChange != null}">
 				<div th:if="${okChange == true}"class="alert alert-success alert-dismissible pos-profile-alert fade show" role="alert">
@@ -44,12 +40,11 @@
 				<div class="col-4">
 					<div class="list-group" id="list-tab" role="tablist">
 						<a class="list-group-item list-group-item-action active" id="list-info-list" data-toggle="list" href="#list-info" role="tab" aria-controls="info">Informazioni</a>
-						<a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Modifica Immagine</a>
+						<a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Immagine Profilo</a>
 						<a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Cambia Password</a>
 						<a class="list-group-item list-group-item-action logout-hover" id="list-settings-list" th:href="@{/logout}">LogOut</a>
 					</div>
 				</div>
-				
 				<div class="col-8">
 					<div class="tab-content" id="nav-tabContent">
 						<div class="tab-pane fade show active" id="list-info" role="tabpanel" aria-labelledby="list-info-list">
@@ -61,9 +56,9 @@
 									<strong>Username: </strong><span th:text="${credentials.username}"></span><br>
 									<strong>Ruolo: </strong><span th:text="${credentials.role}"></span><br>
 								</div>
+
 							</div>
 						</div>
-						
 						<div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
 							<h2 align="center"> Cambia Immagine Profilo </h2><br>
 							<form th:action="@{/changeImgProfile/} + ${user.id}" method="post" enctype="multipart/form-data">
@@ -107,7 +102,6 @@
 			<div th:replace="fragments/layout.html :: backButton(back='/', text1='Indietro', back2='no', text2=' ')"></div>
 		</div> <!-- end container -->
 	</section>
-
 
 	<footer th:replace="fragments/layout.html :: fondo"></footer>
 	<div th:replace="fragments/layout.html :: jsFiles"></div>
