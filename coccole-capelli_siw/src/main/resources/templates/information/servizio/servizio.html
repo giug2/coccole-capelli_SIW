@@ -7,13 +7,11 @@
 	<section class="servizio-background informations-section ">
 
 		<div th:if="${servizio.img == 'profili'}" class="img-profile-informations">
-			<img src="/images/servizio/servizio.png" alt="">
+			<img src="/images/servizio/taglio-capelli.jpg" alt="">
 		</div>
 		<div th:unless ="${servizio.img == 'profili'}" class="img-profile-informations">
 			<img th:src="'/images/servizio/profili/' + ${servizio.img}" alt="Profile Servizio">
 		</div>
-
-
 	</section>
 
 
