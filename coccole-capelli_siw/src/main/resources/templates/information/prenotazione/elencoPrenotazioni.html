@@ -32,9 +32,6 @@
 							<th th:text="${prenotazione.disponibilita.data}"></th>
 							<th th:text="${prenotazione.disponibilita.oraInizio} + '-' + ${prenotazione.disponibilita.oraFine}"></th>
 							<th>
-								<a class="btn btn-success" th:href="@{'/profile/prenotazione/edit/' + ${prenotazione.id}}">Modifica</a>
-							</th>
-							<th>
 								<div th:replace="fragments/layout.html :: modalDelete(nome=${prenotazione.servizio.nome}, link='/profile/delete/' + ${prenotazione.id}, id=${prenotazione.id})"> </div>
 							</th>
 						</tr>

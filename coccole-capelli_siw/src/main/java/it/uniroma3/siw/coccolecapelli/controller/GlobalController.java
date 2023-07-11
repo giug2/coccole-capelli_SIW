@@ -1,4 +1,4 @@
-/*package it.uniroma3.siw.coccolecapelli.controller;
+package it.uniroma3.siw.coccolecapelli.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,4 +41,3 @@ public class GlobalController {
 		}
 	}
 }
-*/
