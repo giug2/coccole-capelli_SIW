@@ -154,24 +154,4 @@ public class ServizioController {
 		return this.getEditServizio(idS, model);
 	}
 	
-	/*----*/
-	
-	
-/*	@GetMapping("/profile/prenotazione/servizio")
-	public String selectServizio(RedirectAttributes redirect, Model model) {
-		model.addAttribute("servizi", this.servizioService.findAll());
-		
-		Prenotazione prenotazione = (Prenotazione) redirect.getFlashAttributes().get("prenotazione");
-		model.addAttribute("prenotazione", prenotazione);
-		return DIR_PAGES_SERVIZIO + "elencoServiziPrenotazione";
-	}
-	
-	@PostMapping("/profile/servizio")
-	public String selectServizio(@Valid @ModelAttribute("prenotazione") Prenotazione prenotazione, @RequestParam("idChecked") Servizio servizio, RedirectAttributes redirect, Model model) {
-		prenotazione.setServizio(servizio);
-		prenotazione.setProfessionista(servizio.getProfessionista());
-		redirect.addFlashAttribute("prenotazione", prenotazione);
-		
-		return "redirect:/profile/prenotazione/disponibilita";
-	}*/
 }

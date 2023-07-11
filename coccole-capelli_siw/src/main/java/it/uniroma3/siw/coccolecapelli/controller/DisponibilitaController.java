@@ -42,7 +42,7 @@ public class DisponibilitaController {
 	public String getAdminDisponibilitaDipendente(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("disponibilitaList", this.disponibilitaService.findByDipendenteAndActive(this.dipendenteService.findById(id)));
 		model.addAttribute("idDipendente", id);
-		return DIR_ADMIN_PAGES_DISP + "adminElencoDisponibilita.html";
+		return DIR_ADMIN_PAGES_DISP + "adminElencoDisponibilita";
 	}
 	
 	// --- INSERIMENTO
@@ -61,19 +61,23 @@ public class DisponibilitaController {
 		disponibilita.setDipendente(dipendente);
 		disponibilita.setActive(true);
 		this.disponibilitaValidator.validate(disponibilita, bindingResult);
+		
 		if(!bindingResult.hasErrors()) {
 			this.dipendenteService.addDisponibilita(dipendente, disponibilita);
 			return this.getAdminDisponibilitaDipendente(id, model);
 		}
+		
 		model.addAttribute("id", id);
 		return DIR_ADMIN_PAGES_DISP + "disponibilitaForm";
 	}
 	
 	// --- ELIMINAZIONE
+	
 	@GetMapping("/admin/disponibilita/delete/{id}")
 	public String deleteDisponibilita(@PathVariable("id") Long id, Model model) {
 		Disponibilita disponibilita = this.disponibilitaService.findById(id);		
 		Dipendente d = this.dipendenteService.findById(disponibilita.getDipendente().getId());
+		
 		d.getDisponibilita().remove(disponibilita);
 		this.disponibilitaService.delete(disponibilita);
 		this.dipendenteService.save(d);	
@@ -81,9 +85,11 @@ public class DisponibilitaController {
 	}
 	
 	// --- MODIFICA
+	
 	@GetMapping("/admin/disponibilita/edit/{id}")
 	public String editDisponibilita(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("disponibilita", this.disponibilitaService.findById(id));
+		
 		return DIR_ADMIN_PAGES_DISP + "editDisponibilita";
 	}
 	
@@ -103,4 +109,8 @@ public class DisponibilitaController {
 		disponibilita.setId(id);
 		return DIR_ADMIN_PAGES_DISP + "editDisponibilita";
 	}
+	
+	
+	
+	
 }

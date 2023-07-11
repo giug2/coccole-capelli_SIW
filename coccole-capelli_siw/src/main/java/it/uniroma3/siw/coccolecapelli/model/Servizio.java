@@ -1,5 +1,7 @@
 package it.uniroma3.siw.coccolecapelli.model;
 
+import it.uniroma3.siw.coccolecapelli.utility.FileStore;
+
 import jakarta.persistence.Entity;
 
 import jakarta.persistence.GeneratedValue;
@@ -78,5 +80,9 @@ public class Servizio {
 
 	public void setImg(String img) {
 		this.img = img;
+	}
+	
+	public void eliminaImmagine() {
+		FileStore.removeImg(DIR_FOLDER_IMG, this.getImg());
 	}
 }

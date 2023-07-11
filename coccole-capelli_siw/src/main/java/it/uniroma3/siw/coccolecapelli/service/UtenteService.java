@@ -27,12 +27,6 @@ public class UtenteService {
         Optional<User> result = this.utenteRepository.findById(id);
         return result.orElse(null);
     }
-    
-    @Transactional
-    public User getUsername(String logina) {
-        Optional<User> result = this.utenteRepository.findByUsername(logina);
-        return result.orElse(null);
-    }
 	
     public List<User> getAllUsers() {
         List<User> result = new ArrayList<>();
@@ -41,7 +35,7 @@ public class UtenteService {
             result.add(user);
         return result;
     }
-    
+/*    
     public List<User> getAllUsersDipendenti() {
         List<User> result = new ArrayList<>();
         Iterable<User> iterable = this.utenteRepository.findAll();
@@ -51,6 +45,12 @@ public class UtenteService {
         		 result.add(user);
         }
         return result;
+    } */
+    
+    @Transactional
+    public User getUsername(String logina) {
+        Optional<User> result = this.utenteRepository.findByUsername(logina);
+        return result.orElse(null);
     }
     
 	public boolean alreadyExists(User u) {

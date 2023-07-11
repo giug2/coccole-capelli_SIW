@@ -17,14 +17,14 @@ public class GeneralController {
 	private DipendenteService dipendenteService;
 
 	@GetMapping("/")
-	public String getServiziAndDipendente(Model model) {
-		model.addAttribute("dipendente", this.dipendenteService.findLastDipendente());
+	public String getServiziAndDipendenti(Model model) {
+		model.addAttribute("dipendenti", this.dipendenteService.findLastDipendenti());
 		model.addAttribute("servizi", this.servizioService.findLastServizi());
 		return "index";
 	}
 	
 	@GetMapping("/admin")
 	public String get() {
-		return "redirect:/admin/dipendente";
+		return "redirect:/admin/dipendenti";
 	}
 }

@@ -59,7 +59,7 @@ public class DipendenteService {
 		this.dipendenteRepository.save(dipendente);
 	}
 
-	public List<Dipendente> findLastDipendente() {
+	public List<Dipendente> findLastDipendenti() {
 		return this.dipendenteRepository.findTopN(6);
 	}
 }

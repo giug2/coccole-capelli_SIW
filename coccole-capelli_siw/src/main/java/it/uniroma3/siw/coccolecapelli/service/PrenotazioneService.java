@@ -26,16 +26,5 @@ public class PrenotazioneService {
 		this.prenotazioneRepository.delete(p);
 	}
 	
-	public List<Prenotazione> prenotazioniValide(List<Prenotazione> lista) {
-		Iterator<Prenotazione> i = lista.iterator();
-		while(i.hasNext()) {
-			Prenotazione p = i.next();
-			if(LocalDate.parse(i.next().getDisponibilita().getData()).isBefore(LocalDate.now())) {
-				i.remove();
-				this.prenotazioneRepository.delete(p);
-			}
-			i.next();
-		}
-		return lista;
-	}
+
 }

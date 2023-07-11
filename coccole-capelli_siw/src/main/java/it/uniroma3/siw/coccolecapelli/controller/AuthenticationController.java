@@ -87,16 +87,16 @@ public class AuthenticationController {
 //	}
 	
 	@GetMapping("/success")
-	//@RequestMapping(value="/default", method=RequestMethod.GET)
 	public String defaultAfterLogin(Model model) {
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
 		if(credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-//			return "redirect:/admin/dipendente";
-			return "index.html";
+			return "redirect:/admin/dipendenti";
 		}
+		
 		return this.profileUser(model);
 	}
+	
 	
 	@PostMapping(value= {"/register"})
 	public String registerUser(@Valid @ModelAttribute("utente") User user,
@@ -108,6 +108,7 @@ public class AuthenticationController {
         // validazione user e credenziali
         this.utenteValidator.validate(user, utenteBindingResult);
         this.credentialsValidator.validate(credentials, credentialsBindingResult);
+        
 		if(!utenteBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
 			user.setImg("icon-default-user.png");
 			credentials.setUtente(user);
@@ -116,13 +117,6 @@ public class AuthenticationController {
 		}
 		return "autenticazione/formRegisterUser";
 	}
-	
-	/*//vai alla pagin index (o admin dashboard) dopo il login con OAuth ***DA MODELLARE BENE SE SI RITIENE UTILE***
-	@GetMapping("/defaultOauth")
-	public String oauthLogin(Model model) {
-		OAuth2User userDetails = (OAuth2User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return "index.html";
-	}*/
 	
 	@RequestMapping(value={"login/oauth2/user"}, method = RequestMethod.GET)
 	public String oAuth2Successful(Model model){
@@ -133,7 +127,6 @@ public class AuthenticationController {
 	
 	/* PROFILE */
 	@GetMapping("/profile")
-	//@RequestMapping(value="/profile", method=RequestMethod.GET)
 	public String profileUser(Model model) {
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
@@ -152,13 +145,16 @@ public class AuthenticationController {
 		
 		credentials.setUsername("defaultUsernameForVa");
 		credentialsValidator.validate(credentials, credentialsBindingResult);
+		
 		if(!credentials.getPassword().equals(pass)) {
 			credentialsBindingResult.addError(new ObjectError("notMatchConfirmPassword", "Le password non coincidono"));
 		}
+		
 		Credentials c = credentialsService.getCredentials(id);
 		User user = utenteService.getUser(c.getUtente().getId());
 		credentials.setUsername(c.getUsername());
 		credentials.setId(id);
+		
 		if(!credentialsBindingResult.hasErrors()) {
 			c.setPassword(this.passwordEncoder.encode(credentials.getPassword()));
 			credentialsService.save(c);
@@ -176,7 +172,6 @@ public class AuthenticationController {
 	@PostMapping("/changeImgProfile/{idUser}")
 	public String changeImgProfile(@PathVariable("idUser") Long id,
 								   @RequestParam("file") MultipartFile file, Model model) {
-		
 		User user = utenteService.getUser(id);
 		if(!user.getImg().equals("icon-user-default.png")) {
 			FileStore.removeImg(DIR_FOLDER_IMG, user.getImg());

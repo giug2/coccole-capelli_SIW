@@ -56,12 +56,15 @@ public class PrenotazioneController {
 	public String selectDisponibilita(@PathVariable("idU") Long idUtente, 
 									  @PathVariable("idS") Long idServizio, 
 									  Model model) {
-		
 		model.addAttribute("idUtente", idUtente);
 		model.addAttribute("idServizio", idServizio);
 		model.addAttribute("prenotazione", new Prenotazione());
+		
 		Dipendente p = this.servizioService.findById(idServizio).getDipendente();
+		
 		model.addAttribute("disponibilitaList", this.disponibilitaService.findByDipendenteAndActive(p));
+		
+		
 		return DIR_PAGES_PREN + "elencoDisponibilitaPrenotazione";
 	}
 	
@@ -82,6 +85,7 @@ public class PrenotazioneController {
 		p.setDisponibilita(d);
 		p.setServizio(s); 
 		d.setActive(false);
+		
 		this.prenotazioneValidator.validate(p, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			this.utenteService.addPrenotazione(u, p);			
@@ -97,6 +101,7 @@ public class PrenotazioneController {
 		User u = p.getCliente();
 		Disponibilita d = p.getDisponibilita();
 		//Parrucchiere parr = p.getParrucchiere();
+		
 		d.setActive(true);
 		this.utenteService.deletePrenotazione(u, p);
 		this.prenotazioneService.delete(p);
