@@ -36,6 +36,16 @@ public class ServizioService {
 		servizio.setPrezzo(newServizio.getPrezzo());
 		this.servizioRepository.save(servizio);
 	}
+	
+	public Servizio newServizio(Servizio s) {
+		Servizio ns = new Servizio();
+		ns.setDescrizione(s.getDescrizione());
+		ns.setDipendente(s.getDipendente());
+		ns.setImg(s.getImg());
+		ns.setNome(s.getNome());
+		ns.setPrezzo(s.getPrezzo());
+		return this.servizioRepository.save(ns);
+	}
 
 	public Servizio findById(Long id) {
 		return this.servizioRepository.findById(id).get();

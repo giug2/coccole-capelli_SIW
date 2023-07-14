@@ -89,9 +89,9 @@ public class AuthenticationController {
 	public String defaultAfterLogin(Model model) {
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
-		if(credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-			return "redirect:/admin/dipendenti";
-		}
+//		if(credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
+//			return "redirect:/admin/dipendenti";
+//		}
 		
 		return this.profileUser(model);
 	}

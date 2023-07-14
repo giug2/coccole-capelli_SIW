@@ -30,6 +30,16 @@ public class DisponibilitaService {
 		return this.disponibilitaRepository.findByDipendente(dipendente);
 	}
 	
+	public Disponibilita newDisponibilita(Disponibilita d) {
+		Disponibilita nd = new Disponibilita();
+		nd.setActive(d.getActive());
+		nd.setData(d.getData());
+		nd.setDipendente(d.getDipendente());
+		nd.setOraFine(d.getOraFine());
+		nd.setOraInizio(d.getOraInizio());
+		return this.disponibilitaRepository.save(nd);
+	}
+	
 	@Transactional
 	public void update(Disponibilita disponibilita, Disponibilita newDisponibilita) {
 		disponibilita.setData(newDisponibilita.getData());

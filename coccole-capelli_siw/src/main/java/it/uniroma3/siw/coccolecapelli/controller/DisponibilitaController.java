@@ -61,6 +61,7 @@ public class DisponibilitaController {
 		disponibilita.setDipendente(dipendente);
 		disponibilita.setActive(true);
 		this.disponibilitaValidator.validate(disponibilita, bindingResult);
+		disponibilita = disponibilitaService.newDisponibilita(disponibilita);
 		
 		if(!bindingResult.hasErrors()) {
 			this.dipendenteService.addDisponibilita(dipendente, disponibilita);

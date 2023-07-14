@@ -79,6 +79,7 @@ public class ServizioController {
 		Dipendente dipendente = dipendenteService.findById(id);
 		servizio.setDipendente(dipendente);
 		this.servizioValidator.validate(servizio, bindingResult);
+		servizio = servizioService.newServizio(servizio);
 		if(!bindingResult.hasErrors()) {
 			servizio.setImg(FileStore.store(file,DIR_FOLDER_IMG));
 			this.dipendenteService.addServizio(dipendente, servizio);
