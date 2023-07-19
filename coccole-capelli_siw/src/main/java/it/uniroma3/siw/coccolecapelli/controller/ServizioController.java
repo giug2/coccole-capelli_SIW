@@ -46,7 +46,6 @@ public class ServizioController {
 	@GetMapping("/servizi")
 	public String getServizi(Model model) {
 		model.addAttribute("servizi", this.servizioService.findAll());
-		
 		return DIR_PAGES_SERVIZIO + "elencoServizi";
 	}
 	

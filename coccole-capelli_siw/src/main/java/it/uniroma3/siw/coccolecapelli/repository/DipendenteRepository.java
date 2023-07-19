@@ -13,5 +13,6 @@ public interface DipendenteRepository extends CrudRepository<Dipendente, Long> {
 
 	@Query(value = "SELECT * FROM dipendente order by id limit :limit", nativeQuery = true)
 	public List<Dipendente> findTopN(@Param("limit") int limit);
+	
 
 }
